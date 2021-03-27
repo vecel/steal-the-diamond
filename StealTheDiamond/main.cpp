@@ -1,12 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "TileMap.h"
+#include "Level.h"
+#include "Player.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1360, 768), "Steal The Diamond");
-
-    TileMap* tileMap = new TileMap(&window);
+    sf::RenderWindow window(sf::VideoMode(1400, 1050), "Steal The Diamond");
+    Level level(&window, "levels\\test-level.txt");
 
     while (window.isOpen())
     {
@@ -15,15 +15,19 @@ int main()
         {
             if (event.type == sf::Event::Closed) {
                 window.close();
-                //delete tileMap;
+            }
+
+            if (event.type == sf::Event::KeyPressed) {
+                // player.move(event.key.code)
             }
                 
         }
 
+        // check player's movement
+
         window.clear();
 
-        tileMap->draw();
-        tileMap->clear();
+        level.draw();
 
         window.display();
     }

@@ -1,8 +1,12 @@
 #pragma once
-#include "Block.h"
-class Wall : public Block
+#include "Object.h"
+
+class Wall : public Object
 {
 public:
-	Wall(int x, int y);
+	Wall(sf::Vector2i pos);
+
+private:
+	
 };
 
