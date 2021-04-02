@@ -65,10 +65,13 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\player-test.png">
+    <Image Include="textures\stone-wall.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
-    <Image Include="textures\wall-test.png">
+    <Image Include="textures\player.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\wooden-box.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

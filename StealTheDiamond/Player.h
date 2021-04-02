@@ -1,9 +1,15 @@
 #pragma once
 #include "Object.h"
+
+class Level;
+
 class Player : public Object
 {
 public:
-	Player(sf::Vector2i pos);
-	//void move(sf::Keyboard::Key k);
+	Player(Level* level, sf::Vector2i pos);
+	void move(sf::Vector2i dir);
+
+private:
+	
 };
 

@@ -167,8 +167,9 @@
     <Text Include="levels\test-level.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="textures\player-test.png" />
-    <Image Include="textures\wall-test.png" />
+    <Image Include="textures\player.png" />
+    <Image Include="textures\stone-wall.png" />
+    <Image Include="textures\wooden-box.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

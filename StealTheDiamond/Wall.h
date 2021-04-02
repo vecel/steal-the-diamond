@@ -4,7 +4,7 @@
 class Wall : public Object
 {
 public:
-	Wall(sf::Vector2i pos);
+	Wall(Level* level, sf::Vector2i pos);
 
 private:
 	

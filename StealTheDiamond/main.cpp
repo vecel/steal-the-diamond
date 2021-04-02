@@ -13,17 +13,18 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
+
             if (event.type == sf::Event::Closed) {
                 window.close();
-            }
-
-            if (event.type == sf::Event::KeyPressed) {
-                // player.move(event.key.code)
             }
                 
         }
 
         // check player's movement
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) level.activePlayer->move(sf::Vector2i(-1, 0));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) level.activePlayer->move(sf::Vector2i(1, 0));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) level.activePlayer->move(sf::Vector2i(0, -1));
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) level.activePlayer->move(sf::Vector2i(0, 1));
 
         window.clear();
 

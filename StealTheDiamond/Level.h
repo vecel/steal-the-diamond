@@ -1,19 +1,19 @@
 #pragma once
-#include "Object.h"
 #include "TileMap.h"
-#include "Player.h"
 #include <vector>
+#include "Object.h"
+#include "Player.h"
 
 class Level
 {
 public:
-	Level(sf::RenderWindow* w, std::string filePath);
+	Level(sf::RenderWindow* window, std::string filePath);
 	~Level();
 
 	void loadFromFile(std::string path);
 	void draw();
 
-	TileMap tileMap;
+	TileMap* tileMap;
 	std::vector<Object*> objects;
 	Player* activePlayer;
 
