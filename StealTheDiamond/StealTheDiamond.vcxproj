@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Box.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Box.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
@@ -167,6 +169,7 @@
     <Text Include="levels\test-level.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\ground-assets.png" />
     <Image Include="textures\player.png" />
     <Image Include="textures\stone-wall.png" />
     <Image Include="textures\wooden-box.png" />

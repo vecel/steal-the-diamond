@@ -7,7 +7,8 @@ class Object: public sf::Drawable
 {
 public:
 	enum Flags : unsigned int {
-		MOVABLE = 1
+		MOVABLE = 1,
+		WATER_REPLACABLE = 2
 		// add flags when needed with values of the form 2 to the power of (i)
 	};
 
@@ -24,7 +25,7 @@ public:
 	bool moved;
 	
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void move(sf::Vector2i dir);
+	virtual bool move(sf::Vector2i dir);
 
 protected:
 	Object* getObjectAt(sf::Vector2i pos);
