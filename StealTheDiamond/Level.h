@@ -13,8 +13,12 @@ public:
 	void loadFromFile(std::string path);
 	void draw();
 
+	void addObjectToRemove(Object* obj);
+	void removeOldObj();
+
 	TileMap* tileMap;
 	std::vector<Object*> objects;
+	std::vector<Object*> objToRemove;
 	Player* activePlayer;
 
 private:

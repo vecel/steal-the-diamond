@@ -3,8 +3,6 @@
 #include "Level.h"
 #include "Player.h"
 
-bool func() { return 1; }
-
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1400, 1050), "Steal The Diamond");
@@ -24,15 +22,13 @@ int main()
                 
         }
 
-        // check player's movement
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) if(level.activePlayer->move(sf::Vector2i(-1, 0)));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) if(level.activePlayer->move(sf::Vector2i(1, 0)));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) if(level.activePlayer->move(sf::Vector2i(0, -1)));
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) level.activePlayer->move(sf::Vector2i(0, 1));
-
-        func();
+        // std::cout << "Objects: " << level.objects.size() << '\n';
 
         window.clear();
+
+        if(level.activePlayer != nullptr) level.activePlayer->update();
+
+        level.removeOldObj();
 
         level.draw();
 

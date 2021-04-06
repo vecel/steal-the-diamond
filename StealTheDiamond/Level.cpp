@@ -53,3 +53,32 @@ void Level::loadFromFile(std::string path) {
 
 void Level::draw() { tileMap->draw(); }
 
+void Level::addObjectToRemove(Object* obj) {
+	/*for (std::vector<Object*>::iterator it = objects.begin(); 
+		it < objects.end(); ++it) {
+
+		if (*it == obj) {
+			printf("pointers match\n");
+			//objects.erase(it);
+			printf("after erase\n");
+		}
+
+	}*/
+	objToRemove.push_back(obj);
+}
+
+void Level::removeOldObj() {
+	for (std::vector<Object*>::iterator it = objToRemove.begin();
+		it < objToRemove.end(); ++it) {
+
+		for (auto iter = objects.begin(); iter < objects.end(); iter++) {
+			if (*it == *iter) {
+				objects.erase(iter);
+				printf("object erased\n");
+				break;
+			}
+		}
+
+	}
+}
+

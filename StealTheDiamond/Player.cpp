@@ -11,30 +11,34 @@ Player::Player(Level* level, sf::Vector2i pos) : Object(level, pos) {
 	}
 	sprite.setTexture(texture);
 
-	flags = MOVABLE;
+	flags = MOVABLE | DROWNING;
 }
 
-bool Player::move(sf::Vector2i dir) {
-	/* for the moment player's move function is the same as object's move function*/
+Player::~Player() {
+	printf("Player destructor\n");
+}
 
-	sf::Vector2i newPos = position + dir;
-	Object* nextObj = getObjectAt(newPos);
-
-	if (nextObj == nullptr) {
-		// if object at newPos is movable then call it's move method with the same dir parameter
-		if (!moved) {
-			level->tileMap->setObjectAt(newPos, this);
-			level->tileMap->removeObjectAt(position);
-			position = newPos;
-			sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
-			//moved = true;
-		}
-	}
-	else if (nextObj->flags & MOVABLE) {
-		printf("movable object pla\n");
-		if (!nextObj->move(dir)) move(dir);
-	}
+void Player::update() {
 	
-	return moved;
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(sf::Vector2i(-1, 0));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) move(sf::Vector2i(1, 0));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(sf::Vector2i(0, -1));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(sf::Vector2i(0, 1));
+
+}
+
+bool Player::move(sf::Vector2i dir) { 
+	return Object::move(dir);
+}
+
+bool Player::onSinking() {
+	printf("player drowned\n");
+	level->tileMap->setObjectAt(position, nullptr);
+	level->activePlayer = nullptr;
+	//delete this; // usun jeszcze z level.objects
+	level->addObjectToRemove(this);
+	// usuwa obiekt, ale zostaje wskaznik na pusta pamiec - niebezbieczne!!!
+
+	return false;
 }
 

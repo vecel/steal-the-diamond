@@ -25,7 +25,6 @@ public:
 	void loadLayer1(std::vector<Object*> objects);
 
 	void setObjectAt(sf::Vector2i pos, Object* obj);
-	//void setObjectAt(sf::Vector2i pos, int groundType);
 
 	void fillWater(sf::Vector2i pos);
 

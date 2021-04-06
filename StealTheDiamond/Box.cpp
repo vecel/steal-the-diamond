@@ -11,5 +11,5 @@ Box::Box(Level* level, sf::Vector2i pos) : Object(level, pos){
 }
 
 Box::~Box() {
-
+	printf("Box destructor\n");
 }

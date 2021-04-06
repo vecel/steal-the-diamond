@@ -38,20 +38,42 @@ bool Object::move(sf::Vector2i dir){
 	}
 	else if (nextObj->flags & MOVABLE) {
 		printf("movable object obj\n");
-		if (!nextObj->move(dir)) move(dir);
+		if (nextObj->move(dir)) move(dir);
 		
 	}
 
-	if (level->tileMap->getGroundTypeAt(position) == TileMap::WATER) {
-		if (flags & WATER_REPLACABLE) {
-			level->tileMap->fillWater(position);
-			level->tileMap->setObjectAt(position, nullptr);
-		}
+	if (getGroundTypeAt(position) == TileMap::WATER) {
+		onSinking();
+		return true;
 	}
 
-	return moved;
+	return true;
+}
+
+bool Object::onSinking() {
+	if (flags & WATER_REPLACABLE) {
+		level->tileMap->fillWater(position);
+		level->tileMap->setObjectAt(position, nullptr);
+		//delete this; // usun jeszcze z level.objects
+		printf("before deleting, obj class\n");
+		level->addObjectToRemove(this);
+		printf("after deleting, obj class\n");
+		return false;
+	}
+
+	if (flags & DROWNING) {
+		printf("drowned\n");
+		level->tileMap->setObjectAt(position, nullptr);
+		//delete this; // usun jeszcze z level.objects
+		level->addObjectToRemove(this);
+		return false;
+	}
 }
 
 Object* Object::getObjectAt(sf::Vector2i pos) {
 	return level->tileMap->getObjectAt(pos);
+}
+
+int Object::getGroundTypeAt(sf::Vector2i pos) {
+	return level->tileMap->getGroundTypeAt(pos);
 }
