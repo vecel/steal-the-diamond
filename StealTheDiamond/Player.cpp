@@ -31,14 +31,19 @@ bool Player::move(sf::Vector2i dir) {
 	return Object::move(dir);
 }
 
-bool Player::onSinking() {
+bool Player::onSink() {
 	printf("player drowned\n");
-	level->tileMap->setObjectAt(position, nullptr);
+
 	level->activePlayer = nullptr;
-	//delete this; // usun jeszcze z level.objects
-	level->addObjectToRemove(this);
-	// usuwa obiekt, ale zostaje wskaznik na pusta pamiec - niebezbieczne!!!
+
+	Object::onSink();
 
 	return false;
+}
+
+void Player::onFallIntoVoid() {
+	printf("player fell into void... sad :(\n");
+	level->activePlayer = nullptr;
+	Object::onFallIntoVoid();
 }
 

@@ -27,7 +27,8 @@ public:
 	
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual bool move(sf::Vector2i dir);
-	virtual bool onSinking();
+	virtual bool onSink();
+	virtual void onFallIntoVoid();
 
 protected:
 	Object* getObjectAt(sf::Vector2i pos);

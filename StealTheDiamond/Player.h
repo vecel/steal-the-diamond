@@ -13,7 +13,8 @@ public:
 	void update();
 
 	bool move(sf::Vector2i dir);
-	bool onSinking();
+	bool onSink();
+	void onFallIntoVoid();
 
 	sf::Vector2i velocity;
 };
