@@ -9,7 +9,8 @@ public:
 	enum Flags : unsigned int {
 		MOVABLE = 1,
 		WATER_REPLACABLE = 2,
-		DROWNING = 4
+		DROWNING = 4,
+		COLLECTABLE = 8
 		// add flags when needed with values of the form 2 to the power of (i)
 	};
 
@@ -29,6 +30,7 @@ public:
 	virtual bool move(sf::Vector2i dir);
 	virtual bool onSink();
 	virtual void onFallIntoVoid();
+	virtual void onCollect();
 
 protected:
 	Object* getObjectAt(sf::Vector2i pos);

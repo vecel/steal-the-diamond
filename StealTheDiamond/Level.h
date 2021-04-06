@@ -20,8 +20,7 @@ public:
 	std::vector<Object*> objects;
 	std::vector<Object*> objToRemove;
 	Player* activePlayer;
-
-private:
-	//sf::RenderWindow* window;
+	int diamonds;
+	int diamondsToCollect; // czytane z pliku
 };
 

@@ -88,7 +88,7 @@ void TileMap::fillWater(sf::Vector2i pos) {
 }
 
 void TileMap::removeObjectAt(sf::Vector2i pos) {
-	layer1[pos.x + pos.y * WIDTH] = nullptr; // nullptr or empty obj
+	layer1[pos.x + pos.y * WIDTH] = nullptr;
 }
 
 void TileMap::draw() {

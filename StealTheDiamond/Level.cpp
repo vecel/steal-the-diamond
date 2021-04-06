@@ -4,10 +4,13 @@
 #include "Wall.h"
 #include "Player.h"
 #include "Box.h"
+#include "Diamond.h"
 
 Level::Level(sf::RenderWindow* window, std::string filePath) {
 	tileMap = new TileMap(window);
 	loadFromFile(filePath);
+
+	diamonds = 0;
 }
 
 Level::~Level() {
@@ -43,6 +46,10 @@ void Level::loadFromFile(std::string path) {
 				Object* obj = new Box(this, position);
 				objects.push_back(obj);
 			}
+			else if (objType == "Diam") {
+				Object* obj = new Diamond(this, position);
+				objects.push_back(obj);
+			}
 		}
 	}
 
@@ -54,16 +61,6 @@ void Level::loadFromFile(std::string path) {
 void Level::draw() { tileMap->draw(); }
 
 void Level::addObjectToRemove(Object* obj) {
-	/*for (std::vector<Object*>::iterator it = objects.begin(); 
-		it < objects.end(); ++it) {
-
-		if (*it == obj) {
-			printf("pointers match\n");
-			//objects.erase(it);
-			printf("after erase\n");
-		}
-
-	}*/
 	objToRemove.push_back(obj);
 }
 

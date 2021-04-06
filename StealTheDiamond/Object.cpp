@@ -39,7 +39,6 @@ bool Object::move(sf::Vector2i dir){
 	else if (nextObj->flags & MOVABLE) {
 		printf("movable object obj\n");
 		if (nextObj->move(dir)) move(dir);
-		
 	}
 
 	if (getGroundTypeAt(position) == TileMap::WATER) {
@@ -74,6 +73,9 @@ bool Object::onSink() {
 void Object::onFallIntoVoid() {
 	level->tileMap->setObjectAt(position, nullptr);
 	level->addObjectToRemove(this);
+}
+
+void Object::onCollect() {
 }
 
 Object* Object::getObjectAt(sf::Vector2i pos) {

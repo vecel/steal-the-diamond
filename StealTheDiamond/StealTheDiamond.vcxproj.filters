@@ -36,6 +36,9 @@
     <ClCompile Include="Box.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Diamond.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -57,6 +60,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Box.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Diamond.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -81,6 +87,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\ground-assets.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\diamond.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>
