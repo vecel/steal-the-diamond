@@ -5,18 +5,28 @@
 #include "Wall.h"
 #include "Player.h"
 
-TileMap::TileMap(sf::RenderWindow* window) {
+TileMap::TileMap(sf::RenderWindow* window, std::string txtAsset) {
 	printf("TileMap constructor\n");
 	this->window = window;
+
+	if (!tilesAsset.loadFromFile(txtAsset)) printf("Cannot load tilesAssets\n");
+	//if (!exit.loadFromFile("textures\\door.png")) printf("Cannot load exit's texture\n");
+
+	setUpTexturesMap();
 }
 
 TileMap::~TileMap() {
 	printf("TileMap destructor\n");
 }
 
-bool TileMap::loadLayer0(std::fstream& levelData, std::string txtAsset, int tileSize) {
-	
-	if (!tilesAsset.loadFromFile(txtAsset)) return false;
+bool TileMap::loadLayer0(std::fstream& levelData, int tileSize) {
+
+	int exitX, exitY;
+
+	levelData.ignore(1000, ':'); // ignore descriptions in level data file
+	levelData >> exitX >> exitY;
+
+	exit = new Exit(sf::Vector2i(exitX, exitY), "textures\\exit.png");
 
 	backgroundTiles.setPrimitiveType(sf::Quads);
 	backgroundTiles.resize(WIDTH * HEIGHT * 4);
@@ -25,17 +35,14 @@ bool TileMap::loadLayer0(std::fstream& levelData, std::string txtAsset, int tile
 		for (int j = 0; j < WIDTH; ++j) {
 
 			int tileType;
-			levelData >> tileType;
+			std::string tileGraphics;
+			levelData >> tileType >> tileGraphics;
 
 			layer0[j + i * WIDTH] = tileType;
 
 			sf::Vector2f txtPix;
 
-			switch (tileType) {
-			case 0: txtPix = sf::Vector2f(0, 0); break;
-			case 1: txtPix = sf::Vector2f(4 * tileSize, tileSize); break;
-			case 2: txtPix = sf::Vector2f(6 * tileSize, 0); break;
-			}
+			txtPix = tilesTextures[tileGraphics];
 
 			sf::Vertex* quad = &backgroundTiles[(j + i * WIDTH) * 4];
 
@@ -52,7 +59,7 @@ bool TileMap::loadLayer0(std::fstream& levelData, std::string txtAsset, int tile
 	}
 
 	sf::Transform transform;
-	transform.translate(sf::Vector2f(10, 10));
+	transform.translate(sf::Vector2f(10.0f, 10.0f));
 
 	states.transform = transform;
 	states.texture = &tilesAsset;
@@ -87,6 +94,11 @@ void TileMap::fillWater(sf::Vector2i pos) {
 	}
 }
 
+void TileMap::showExit() {
+	isExitShown = true;
+	layer0[exit->position.x + exit->position.y * WIDTH] = EXIT;
+}
+
 void TileMap::removeObjectAt(sf::Vector2i pos) {
 	layer1[pos.x + pos.y * WIDTH] = nullptr;
 }
@@ -94,7 +106,11 @@ void TileMap::removeObjectAt(sf::Vector2i pos) {
 void TileMap::draw() {
 
 	window->draw(backgroundTiles, states);
+
+	if(isExitShown) window->draw(*exit);
+
 	for (Object* obj : layer1) if(obj != nullptr) obj->draw(*window, sf::RenderStates::Default);
+
 }
 
 void TileMap::clear() {
@@ -108,6 +124,42 @@ Object* TileMap::getObjectAt(sf::Vector2i pos) {
 
 int TileMap::getGroundTypeAt(sf::Vector2i pos) {
 	return layer0[pos.x + pos.y * WIDTH];
+}
+
+
+
+
+void TileMap::setUpTexturesMap() {
+	int txtCount = 64;
+	tilesTextures.reserve(txtCount);
+
+
+	// fuckup
+	tilesTextures["grass"] = sf::Vector2f(0, 0);
+	tilesTextures["grass1"] = sf::Vector2f(tileSize, 0);
+	tilesTextures["grass2"] = sf::Vector2f(2 * tileSize, 0);
+	tilesTextures["grass3"] = sf::Vector2f(3 * tileSize, 0);
+	tilesTextures["grass4"] = sf::Vector2f(4 * tileSize, 0);
+	tilesTextures["sand"] = sf::Vector2f(5 * tileSize, 0);
+	tilesTextures["water"] = sf::Vector2f(6 * tileSize, 0);
+	tilesTextures["box_under_water"] = sf::Vector2f(7 * tileSize, 0);
+	tilesTextures["grass5"] = sf::Vector2f(0, tileSize);
+	tilesTextures["grass6"] = sf::Vector2f(tileSize, tileSize);
+	tilesTextures["grass7"] = sf::Vector2f(2 * tileSize, tileSize);
+	tilesTextures["grass8"] = sf::Vector2f(3 * tileSize, tileSize);
+	tilesTextures["void"] = sf::Vector2f(4 * tileSize, tileSize);
+	tilesTextures["void1"] = sf::Vector2f(5 * tileSize, tileSize);
+	tilesTextures["void2"] = sf::Vector2f(6 * tileSize, tileSize);
+	tilesTextures["void3"] = sf::Vector2f(7 * tileSize, tileSize);
+	tilesTextures["void4"] = sf::Vector2f(0, 2 * tileSize);
+	tilesTextures["sand1"] = sf::Vector2f(tileSize, 2 * tileSize);
+	tilesTextures["sand2"] = sf::Vector2f(2 * tileSize, 2 * tileSize);
+	tilesTextures["sand3"] = sf::Vector2f(3 * tileSize, 2 * tileSize);
+	tilesTextures["sand4"] = sf::Vector2f(4 * tileSize, 2 * tileSize);
+	tilesTextures["void5"] = sf::Vector2f(5 * tileSize, 2 * tileSize);
+	tilesTextures["void6"] = sf::Vector2f(6 * tileSize, 2 * tileSize);
+	tilesTextures["void7"] = sf::Vector2f(7 * tileSize, 2 * tileSize);
+	tilesTextures["void8"] = sf::Vector2f(0, 3 * tileSize);
 }
 
 

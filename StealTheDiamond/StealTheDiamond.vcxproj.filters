@@ -39,6 +39,9 @@
     <ClCompile Include="Diamond.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Exit.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -65,6 +68,9 @@
     <ClInclude Include="Diamond.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Exit.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StealTheDiamond.rc">
@@ -73,6 +79,9 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="levels\test-level.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="levels\test-level-2.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
   </ItemGroup>
@@ -90,6 +99,12 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\diamond.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\player-yellow.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\exit.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

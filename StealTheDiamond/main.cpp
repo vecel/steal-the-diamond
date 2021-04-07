@@ -6,7 +6,7 @@
 int main()
 {
     sf::RenderWindow window(sf::VideoMode(1400, 1050), "Steal The Diamond");
-    Level level(&window, "levels\\test-level.txt");
+    Level level(&window, "levels\\test-level-2.txt");
 
     window.setFramerateLimit(30);
 

@@ -8,7 +8,7 @@ Diamond::Diamond(Level* level, sf::Vector2i pos) : Object(level, pos) {
 	}
 	sprite.setTexture(texture);
 
-	flags = MOVABLE | COLLECTABLE;
+	flags = MOVABLE | COLLECTABLE | DROWNING;
 }
 
 Diamond::~Diamond() {
@@ -20,4 +20,10 @@ void Diamond::onCollect() {
 	printf("diamond collected\n");
 	std::cout << level->diamonds << '\n';
 	level->addObjectToRemove(this);
+
+	// zamiast porownania moze funkcja w level.cpp isLevelWon()
+	if (level->diamonds == level->diamondsToCollect) {
+		printf("All diamonds collected\n");
+		level->tileMap->showExit();
+	}
 }

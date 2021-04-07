@@ -7,7 +7,8 @@
 #include "Diamond.h"
 
 Level::Level(sf::RenderWindow* window, std::string filePath) {
-	tileMap = new TileMap(window);
+	tileMap = new TileMap(window, "textures\\ground-assets.png");
+
 	loadFromFile(filePath);
 
 	diamonds = 0;
@@ -22,7 +23,12 @@ void Level::loadFromFile(std::string path) {
 
 	std::fstream levelData(path);
 
-	tileMap->loadLayer0(levelData, "textures\\ground-assets.png");
+	if (!levelData.good()) throw "Unexpected problem with level data file";
+
+	levelData.ignore(1000, ':'); // ignore descriptions in level data file
+	levelData >> diamondsToCollect;
+
+	tileMap->loadLayer0(levelData);
 
 	for (int i = 0; i < tileMap->HEIGHT; ++i) {
 		for (int j = 0; j < tileMap->WIDTH; ++j) {

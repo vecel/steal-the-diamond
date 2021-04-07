@@ -9,7 +9,7 @@ public:
 	enum Flags : unsigned int {
 		MOVABLE = 1,
 		WATER_REPLACABLE = 2,
-		DROWNING = 4,
+		DROWNING = 4, // drowning troche niepotrzebne, bo wszystko moze tonac
 		COLLECTABLE = 8
 		// add flags when needed with values of the form 2 to the power of (i)
 	};

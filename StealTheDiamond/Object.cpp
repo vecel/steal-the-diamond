@@ -23,6 +23,8 @@ void Object::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 bool Object::move(sf::Vector2i dir){
+	moved = false;
+
 	sf::Vector2i newPos = position + dir;
 	Object* nextObj = getObjectAt(newPos);
 
@@ -33,7 +35,7 @@ bool Object::move(sf::Vector2i dir){
 			level->tileMap->removeObjectAt(position);
 			position = newPos;
 			sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
-			//moved = true;
+			moved = true;
 		}
 	}
 	else if (nextObj->flags & MOVABLE) {
@@ -51,7 +53,7 @@ bool Object::move(sf::Vector2i dir){
 		return true;
 	}
 
-	return true;
+	return moved;
 }
 
 bool Object::onSink() {

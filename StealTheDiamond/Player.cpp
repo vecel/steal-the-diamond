@@ -6,7 +6,7 @@
 Player::Player(Level* level, sf::Vector2i pos) : Object(level, pos) {
 	
 	// create and load the texture
-	if (!texture.loadFromFile("textures\\player.png")) {
+	if (!texture.loadFromFile("textures\\player-yellow.png")) {
 		printf("Cannot load the texture\n");
 	}
 	sprite.setTexture(texture);
@@ -25,9 +25,11 @@ void Player::update() {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(sf::Vector2i(0, -1));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(sf::Vector2i(0, 1));
 
+	if (getGroundTypeAt(position) == TileMap::EXIT) printf("Exit reached\n");
 }
 
 bool Player::move(sf::Vector2i dir) { 
+	moved = false;
 
 	sf::Vector2i newPos = position + dir;
 	Object* nextObj = getObjectAt(newPos);
@@ -43,10 +45,10 @@ bool Player::move(sf::Vector2i dir) {
 				level->tileMap->removeObjectAt(position);
 				position = newPos;
 				sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
-				//moved = true;
+				moved = true;
 			}
 
-			return true;
+			return moved;
 		}
 	}
 
