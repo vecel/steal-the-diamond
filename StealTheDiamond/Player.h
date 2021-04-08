@@ -17,5 +17,6 @@ public:
 	void onFallIntoVoid();
 
 	sf::Vector2i velocity;
+	std::vector<int> keys;
 };
 

@@ -133,8 +133,6 @@ void TileMap::setUpTexturesMap() {
 	int txtCount = 64;
 	tilesTextures.reserve(txtCount);
 
-
-	// fuckup
 	tilesTextures["grass"] = sf::Vector2f(0, 0);
 	tilesTextures["grass1"] = sf::Vector2f(tileSize, 0);
 	tilesTextures["grass2"] = sf::Vector2f(2 * tileSize, 0);

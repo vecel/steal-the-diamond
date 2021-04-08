@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Box.h"
 #include "Diamond.h"
+#include "Key.h"
 
 Level::Level(sf::RenderWindow* window, std::string filePath) {
 	tileMap = new TileMap(window, "textures\\ground-assets.png");
@@ -54,6 +55,10 @@ void Level::loadFromFile(std::string path) {
 			}
 			else if (objType == "Diam") {
 				Object* obj = new Diamond(this, position);
+				objects.push_back(obj);
+			}
+			else if (objType == "Key1") {
+				Object* obj = new Key(this, position, 1);
 				objects.push_back(obj);
 			}
 		}

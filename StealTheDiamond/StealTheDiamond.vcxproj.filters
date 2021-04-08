@@ -42,6 +42,9 @@
     <ClCompile Include="Exit.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Key.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -69,6 +72,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Exit.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -105,6 +111,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\exit.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\keys.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>
