@@ -26,45 +26,49 @@ void Level::loadFromFile(std::string path) {
 
 	if (!levelData.good()) throw "Unexpected problem with level data file";
 
-	levelData.ignore(1000, ':'); // ignore descriptions in level data file
-	levelData >> diamondsToCollect;
+	if (levelData.is_open()) {
 
-	tileMap->loadLayer0(levelData);
+		levelData.ignore(1000, ':'); // ignore descriptions in level data file
+		levelData >> diamondsToCollect;
 
-	for (int i = 0; i < tileMap->HEIGHT; ++i) {
-		for (int j = 0; j < tileMap->WIDTH; ++j) {
-			std::string objType;
-			levelData >> objType;
+		tileMap->loadLayer0(levelData);
 
-			sf::Vector2i position(j, i);
+		for (int i = 0; i < tileMap->HEIGHT; ++i) {
+			for (int j = 0; j < tileMap->WIDTH; ++j) {
+				std::string objType;
+				levelData >> objType;
 
-			if (objType == "Wall") {
-				//printf("Wall\n");
-				Object* obj = new Wall(this, position);
-				objects.push_back(obj);
-			}
-			else if (objType == "Player") {
-				//printf("Player\n");
-				Object* obj = new Player(this, position);
-				activePlayer = dynamic_cast<Player*>(obj);
-				objects.push_back(obj);
-			}
-			else if (objType == "Box") {
-				Object* obj = new Box(this, position);
-				objects.push_back(obj);
-			}
-			else if (objType == "Diam") {
-				Object* obj = new Diamond(this, position);
-				objects.push_back(obj);
-			}
-			else if (objType == "Key1") {
-				Object* obj = new Key(this, position, 1);
-				objects.push_back(obj);
+				sf::Vector2i position(j, i);
+
+				if (objType == "Wall") {
+					//printf("Wall\n");
+					Object* obj = new Wall(this, position);
+					objects.push_back(obj);
+				}
+				else if (objType == "Player") {
+					//printf("Player\n");
+					Object* obj = new Player(this, position);
+					activePlayer = dynamic_cast<Player*>(obj);
+					objects.push_back(obj);
+				}
+				else if (objType == "Box") {
+					Object* obj = new Box(this, position);
+					objects.push_back(obj);
+				}
+				else if (objType == "Diam") {
+					Object* obj = new Diamond(this, position);
+					objects.push_back(obj);
+				}
+				else if (objType == "Key1") {
+					Object* obj = new Key(this, position, 1);
+					objects.push_back(obj);
+				}
 			}
 		}
-	}
 
-	tileMap->loadLayer1(objects);
+		tileMap->loadLayer1(objects);
+
+	}
 
 	levelData.close();
 }

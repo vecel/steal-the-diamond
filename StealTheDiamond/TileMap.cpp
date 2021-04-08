@@ -35,14 +35,21 @@ bool TileMap::loadLayer0(std::fstream& levelData, int tileSize) {
 		for (int j = 0; j < WIDTH; ++j) {
 
 			int tileType;
-			std::string tileGraphics;
-			levelData >> tileType >> tileGraphics;
+			levelData >> tileType;
 
-			layer0[j + i * WIDTH] = tileType;
+
+			// if-else must be updated every time a tile/tile graphics is added
+			Ground ground;
+			if (tileType >= 0 && tileType <= 32) ground = LAND;
+			else if (tileType > 32 && tileType <= 48) ground = VOID;
+			else if (tileType == 49) ground = WATER;
+			else if (tileType == 60) ground = BOX_IN_WATER;
+			
+			layer0[j + i * WIDTH] = ground;
 
 			sf::Vector2f txtPix;
 
-			txtPix = tilesTextures[tileGraphics];
+			txtPix = tilesTextures[tileType];
 
 			sf::Vertex* quad = &backgroundTiles[(j + i * WIDTH) * 4];
 
@@ -133,31 +140,35 @@ void TileMap::setUpTexturesMap() {
 	int txtCount = 64;
 	tilesTextures.reserve(txtCount);
 
-	tilesTextures["grass"] = sf::Vector2f(0, 0);
-	tilesTextures["grass1"] = sf::Vector2f(tileSize, 0);
-	tilesTextures["grass2"] = sf::Vector2f(2 * tileSize, 0);
-	tilesTextures["grass3"] = sf::Vector2f(3 * tileSize, 0);
-	tilesTextures["grass4"] = sf::Vector2f(4 * tileSize, 0);
-	tilesTextures["sand"] = sf::Vector2f(5 * tileSize, 0);
-	tilesTextures["water"] = sf::Vector2f(6 * tileSize, 0);
-	tilesTextures["box_under_water"] = sf::Vector2f(7 * tileSize, 0);
-	tilesTextures["grass5"] = sf::Vector2f(0, tileSize);
-	tilesTextures["grass6"] = sf::Vector2f(tileSize, tileSize);
-	tilesTextures["grass7"] = sf::Vector2f(2 * tileSize, tileSize);
-	tilesTextures["grass8"] = sf::Vector2f(3 * tileSize, tileSize);
-	tilesTextures["void"] = sf::Vector2f(4 * tileSize, tileSize);
-	tilesTextures["void1"] = sf::Vector2f(5 * tileSize, tileSize);
-	tilesTextures["void2"] = sf::Vector2f(6 * tileSize, tileSize);
-	tilesTextures["void3"] = sf::Vector2f(7 * tileSize, tileSize);
-	tilesTextures["void4"] = sf::Vector2f(0, 2 * tileSize);
-	tilesTextures["sand1"] = sf::Vector2f(tileSize, 2 * tileSize);
-	tilesTextures["sand2"] = sf::Vector2f(2 * tileSize, 2 * tileSize);
-	tilesTextures["sand3"] = sf::Vector2f(3 * tileSize, 2 * tileSize);
-	tilesTextures["sand4"] = sf::Vector2f(4 * tileSize, 2 * tileSize);
-	tilesTextures["void5"] = sf::Vector2f(5 * tileSize, 2 * tileSize);
-	tilesTextures["void6"] = sf::Vector2f(6 * tileSize, 2 * tileSize);
-	tilesTextures["void7"] = sf::Vector2f(7 * tileSize, 2 * tileSize);
-	tilesTextures["void8"] = sf::Vector2f(0, 3 * tileSize);
+	// 0 - 32 LAND
+	tilesTextures[0] = sf::Vector2f(0, 0); // grass
+	tilesTextures[1] = sf::Vector2f(tileSize, 0);
+	tilesTextures[2] = sf::Vector2f(2 * tileSize, 0);
+	tilesTextures[3] = sf::Vector2f(3 * tileSize, 0);
+	tilesTextures[4] = sf::Vector2f(4 * tileSize, 0);
+	tilesTextures[5] = sf::Vector2f(5 * tileSize, 0); // sand
+	tilesTextures[6] = sf::Vector2f(0, tileSize);
+	tilesTextures[7] = sf::Vector2f(tileSize, tileSize);
+	tilesTextures[8] = sf::Vector2f(2 * tileSize, tileSize);
+	tilesTextures[9] = sf::Vector2f(3 * tileSize, tileSize);
+	tilesTextures[10] = sf::Vector2f(tileSize, 2 * tileSize); // grass in top-right corner -> bottom-right
+	tilesTextures[11] = sf::Vector2f(2 * tileSize, 2 * tileSize);
+	tilesTextures[12] = sf::Vector2f(3 * tileSize, 2 * tileSize);
+	tilesTextures[13] = sf::Vector2f(4 * tileSize, 2 * tileSize);
+	
+	// 33 - 48 VOID
+	tilesTextures[33] = sf::Vector2f(4 * tileSize, tileSize);
+	tilesTextures[34] = sf::Vector2f(5 * tileSize, tileSize);
+	tilesTextures[35] = sf::Vector2f(6 * tileSize, tileSize);
+	tilesTextures[36] = sf::Vector2f(7 * tileSize, tileSize);
+	tilesTextures[37] = sf::Vector2f(0, 2 * tileSize);
+	tilesTextures[38] = sf::Vector2f(5 * tileSize, 2 * tileSize);
+	tilesTextures[39] = sf::Vector2f(6 * tileSize, 2 * tileSize);
+	tilesTextures[40] = sf::Vector2f(7 * tileSize, 2 * tileSize);
+	tilesTextures[41] = sf::Vector2f(0, 3 * tileSize);
+
+	tilesTextures[49] = sf::Vector2f(6 * tileSize, 0); // water 49
+	tilesTextures[60] = sf::Vector2f(7 * tileSize, 0); // box_in_water 60
 }
 
 

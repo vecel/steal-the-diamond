@@ -21,7 +21,7 @@ public:
 		EXIT = 5
 	};
 
-	std::unordered_map<std::string, sf::Vector2f> tilesTextures;
+	std::unordered_map<int, sf::Vector2f> tilesTextures;
 
 	TileMap(sf::RenderWindow* window, std::string txtAsset);
 	~TileMap();
