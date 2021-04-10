@@ -4,7 +4,7 @@
 class Key : public Object
 {
 public:
-	Key(Level* level, sf::Vector2i pos, int id);
+	Key(Level* level, sf::Vector2i pos, int id, int keyId);
 	~Key();
 
 	void onCollect();

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 class Level;
 
@@ -9,14 +10,14 @@ public:
 	enum Flags : unsigned int {
 		MOVABLE = 1,
 		WATER_REPLACABLE = 2,
-		DROWNING = 4, // drowning troche niepotrzebne, bo wszystko moze tonac
+		INTERACTIVE = 4,
 		COLLECTABLE = 8
 		// add flags when needed with values of the form 2 to the power of (i)
 	};
 
-	const float size = 32.0f;
+	/*static*/ const float size = 32.0f;
 
-	Object(Level* l, sf::Vector2i pos);
+	Object(Level* l, sf::Vector2i pos, int objId);
 	virtual ~Object() = 0;
 
 	Level* level;
@@ -31,6 +32,7 @@ public:
 	virtual bool onSink();
 	virtual void onFallIntoVoid();
 	virtual void onCollect();
+	virtual void onInteract();
 
 protected:
 	Object* getObjectAt(sf::Vector2i pos);

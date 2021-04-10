@@ -1,42 +1,44 @@
-﻿  TileMap.cpp
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(56,52): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+﻿  Diamond.cpp
+  Level.cpp
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(83,37): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(56,38): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(84,38): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(57,58): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(85,41): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(57,44): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(86,52): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(58,64): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(86,38): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(58,44): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(87,41): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(59,58): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(89,46): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
-C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\TileMap.cpp(59,38): warning C4244: "argument": konwersja z "int" do "T", możliwa utrata danych
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(89,36): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
           with
           [
-              T=float
+              T=int
           ]
+  Generowanie kodu...
   StealTheDiamond.vcxproj -> C:\Users\Mati\source\repos\StealTheDiamond\Debug\StealTheDiamond.exe

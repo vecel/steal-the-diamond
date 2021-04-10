@@ -151,7 +151,7 @@ void TileMap::setUpTexturesMap() {
 	tilesTextures[7] = sf::Vector2f(tileSize, tileSize);
 	tilesTextures[8] = sf::Vector2f(2 * tileSize, tileSize);
 	tilesTextures[9] = sf::Vector2f(3 * tileSize, tileSize);
-	tilesTextures[10] = sf::Vector2f(tileSize, 2 * tileSize); // grass in top-right corner -> bottom-right
+	tilesTextures[10] = sf::Vector2f(tileSize, 2 * tileSize); 
 	tilesTextures[11] = sf::Vector2f(2 * tileSize, 2 * tileSize);
 	tilesTextures[12] = sf::Vector2f(3 * tileSize, 2 * tileSize);
 	tilesTextures[13] = sf::Vector2f(4 * tileSize, 2 * tileSize);

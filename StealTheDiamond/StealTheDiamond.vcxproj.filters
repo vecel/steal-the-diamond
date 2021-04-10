@@ -45,6 +45,9 @@
     <ClCompile Include="Key.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Door.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -75,6 +78,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Door.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,6 +120,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\keys.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\object-assets.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

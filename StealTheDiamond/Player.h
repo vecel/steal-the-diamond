@@ -7,7 +7,7 @@ class Level;
 class Player : public Object
 {
 public:
-	Player(Level* level, sf::Vector2i pos);
+	Player(Level* level, sf::Vector2i pos, int id);
 	~Player();
 
 	void update();

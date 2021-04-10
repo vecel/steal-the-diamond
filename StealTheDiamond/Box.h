@@ -5,7 +5,7 @@
 class Box : public Object
 {
 public:
-	Box(Level* level, sf::Vector2i pos);
+	Box(Level* level, sf::Vector2i pos, int id);
 	~Box();
 };
 

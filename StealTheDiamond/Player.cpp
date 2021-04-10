@@ -3,15 +3,9 @@
 #include <iostream> // just for debugging
 #include "Wall.h"
 
-Player::Player(Level* level, sf::Vector2i pos) : Object(level, pos) {
-	
-	// create and load the texture
-	if (!texture.loadFromFile("textures\\player-yellow.png")) {
-		printf("Cannot load the texture\n");
-	}
-	sprite.setTexture(texture);
+Player::Player(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id) {
 
-	flags = MOVABLE | DROWNING;
+	flags = MOVABLE;
 }
 
 Player::~Player() {
@@ -49,6 +43,11 @@ bool Player::move(sf::Vector2i dir) {
 			}
 
 			return moved;
+		}
+
+		if (nextObj->flags & INTERACTIVE) {
+			nextObj->onInteract();
+			return false;
 		}
 	}
 

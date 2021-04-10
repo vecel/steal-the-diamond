@@ -1,11 +1,7 @@
 #include "Box.h"
+#include "Level.h"
 
-Box::Box(Level* level, sf::Vector2i pos) : Object(level, pos){
-
-	if (!texture.loadFromFile("textures\\wooden-box.png")) {
-		printf("Cannot load texture\n");
-	}
-	sprite.setTexture(texture);
+Box::Box(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id){
 
 	flags = MOVABLE | WATER_REPLACABLE;
 }

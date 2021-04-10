@@ -1,12 +1,9 @@
 #include "Wall.h"
 #include "Object.h"
+#include "Level.h"
 
-Wall::Wall(Level* level, sf::Vector2i pos) : Object(level, pos) {
-	
-	
-	if (!texture.loadFromFile("textures\\stone-wall.png")) {
-		printf("Cannot load the texture\n");
-	}
-	sprite.setTexture(texture);
+class Level;
+
+Wall::Wall(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id) {
 	
 }

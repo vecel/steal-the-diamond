@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Diamond.cpp" />
+    <ClCompile Include="Door.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Key.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -159,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Box.h" />
     <ClInclude Include="Diamond.h" />
+    <ClInclude Include="Door.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Key.h" />
     <ClInclude Include="Level.h" />
@@ -180,6 +182,7 @@
     <Image Include="textures\exit.png" />
     <Image Include="textures\ground-assets.png" />
     <Image Include="textures\keys.png" />
+    <Image Include="textures\object-assets.png" />
     <Image Include="textures\player-yellow.png" />
     <Image Include="textures\player.png" />
     <Image Include="textures\stone-wall.png" />

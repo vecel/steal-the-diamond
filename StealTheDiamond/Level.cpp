@@ -6,10 +6,14 @@
 #include "Box.h"
 #include "Diamond.h"
 #include "Key.h"
+#include "Door.h"
+
+const float Level::tileSize = 32.0f;
 
 Level::Level(sf::RenderWindow* window, std::string filePath) {
 	tileMap = new TileMap(window, "textures\\ground-assets.png");
 
+	setUpObjectTextures();
 	loadFromFile(filePath);
 
 	diamonds = 0;
@@ -33,38 +37,7 @@ void Level::loadFromFile(std::string path) {
 
 		tileMap->loadLayer0(levelData);
 
-		for (int i = 0; i < tileMap->HEIGHT; ++i) {
-			for (int j = 0; j < tileMap->WIDTH; ++j) {
-				std::string objType;
-				levelData >> objType;
-
-				sf::Vector2i position(j, i);
-
-				if (objType == "Wall") {
-					//printf("Wall\n");
-					Object* obj = new Wall(this, position);
-					objects.push_back(obj);
-				}
-				else if (objType == "Player") {
-					//printf("Player\n");
-					Object* obj = new Player(this, position);
-					activePlayer = dynamic_cast<Player*>(obj);
-					objects.push_back(obj);
-				}
-				else if (objType == "Box") {
-					Object* obj = new Box(this, position);
-					objects.push_back(obj);
-				}
-				else if (objType == "Diam") {
-					Object* obj = new Diamond(this, position);
-					objects.push_back(obj);
-				}
-				else if (objType == "Key1") {
-					Object* obj = new Key(this, position, 1);
-					objects.push_back(obj);
-				}
-			}
-		}
+		loadObjects(levelData);
 
 		tileMap->loadLayer1(objects);
 
@@ -91,6 +64,66 @@ void Level::removeOldObj() {
 			}
 		}
 
+	}
+}
+
+sf::Vector2i Level::getTextureStartingPoint(int id) {
+	return objectTextures[id];
+}
+
+
+
+
+void Level::setUpObjectTextures() {
+	int txtCount = 128;
+	objectTextures.resize(txtCount);
+
+	// objectTextures[0] - there is no texture for empty object
+	objectTextures[1] = sf::Vector2i(0, 0); // simple wall
+	objectTextures[3] = sf::Vector2i(2 * tileSize, 0);
+	objectTextures[9] = sf::Vector2i(0, tileSize); // broken wall
+	objectTextures[17] = sf::Vector2i(0, 2 * tileSize); // box
+	objectTextures[21] = sf::Vector2i(4 * tileSize, 2 * tileSize);
+	objectTextures[33] = sf::Vector2i(0, 4 * tileSize);
+
+	objectTextures[99] = sf::Vector2i(tileSize, tileSize); // temporary blank tile
+}
+
+void Level::loadObjects(std::fstream& levelData) {
+	for (int i = 0; i < tileMap->HEIGHT; ++i) {
+		for (int j = 0; j < tileMap->WIDTH; ++j) {
+			int objId;
+			levelData >> objId;
+
+			sf::Vector2i position(j, i);
+
+			if (objId > 0 && objId <= 16) {
+				Object* obj = new Wall(this, position, objId);
+				objects.push_back(obj);
+			}
+			else if (objId > 16 && objId <= 17) {
+				Object* obj = new Box(this, position, objId);
+				objects.push_back(obj);
+			}
+			else if (objId > 20 && objId <= 24) {
+				Object* obj = new Player(this, position, objId);
+				activePlayer = dynamic_cast<Player*>(obj);
+				objects.push_back(obj);
+			}
+			else if (objId > 24 && objId <= 32) {
+				Object* obj = new Key(this, position, objId, 1);
+				objects.push_back(obj);
+			}
+			else if (objId > 32 && objId <= 40) {
+				Object* obj = new Door(this, position, objId, 1);
+				objects.push_back(obj);
+			}
+			else if (objId == 99) {
+				Object* obj = new Diamond(this, position, objId);
+				objects.push_back(obj);
+			}
+			
+		}
 	}
 }
 

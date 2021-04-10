@@ -6,11 +6,20 @@
 
 class TileMap;
 
-Object::Object(Level* l, sf::Vector2i pos) {
+Object::Object(Level* l, sf::Vector2i pos, int objId) {
 	position = pos;
 	level = l;
 	moved = false;
 	sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
+
+	if (objId != -1) {
+		sf::Vector2i txtPix = level->getTextureStartingPoint(objId);
+		sf::IntRect txtRect(txtPix, sf::Vector2i(size, size));
+
+		if (!texture.loadFromFile("textures\\object-assets.png", txtRect)) printf("Cannot load texture\n");
+
+		sprite.setTexture(texture);
+	}
 }
 
 Object::~Object()
@@ -63,8 +72,7 @@ bool Object::onSink() {
 		level->addObjectToRemove(this);
 		return false;
 	}
-
-	if (flags & DROWNING) {
+	else {
 		printf("drowned\n");
 		level->tileMap->setObjectAt(position, nullptr); // mozna przeniesc do level.cpp
 		level->addObjectToRemove(this);
@@ -78,6 +86,10 @@ void Object::onFallIntoVoid() {
 }
 
 void Object::onCollect() {
+}
+
+void Object::onInteract() {
+
 }
 
 Object* Object::getObjectAt(sf::Vector2i pos) {
