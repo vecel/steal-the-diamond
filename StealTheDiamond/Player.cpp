@@ -2,10 +2,11 @@
 #include "Level.h"
 #include <iostream> // just for debugging
 #include "Wall.h"
+#include "Bomb.h"
 
 Player::Player(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id) {
-
-	flags = MOVABLE;
+	flags = MOVABLE | DESTROYABLE;
+	bombs = 0;
 }
 
 Player::~Player() {
@@ -13,6 +14,26 @@ Player::~Player() {
 }
 
 void Player::update() {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) showProperties();
+
+	// planting active bombs
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) plantBomb(sf::Vector2i(-1, 0), true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) plantBomb(sf::Vector2i(1, 0), true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) plantBomb(sf::Vector2i(0, -1), true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) plantBomb(sf::Vector2i(0, 1), true);
+		return;
+	}
+
+	// planting inactive bombs
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) plantBomb(sf::Vector2i(-1, 0), false);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) plantBomb(sf::Vector2i(1, 0), false);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) plantBomb(sf::Vector2i(0, -1), false);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) plantBomb(sf::Vector2i(0, 1), false);
+		return;
+	}
+
 	
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(sf::Vector2i(-1, 0));
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) move(sf::Vector2i(1, 0));
@@ -68,5 +89,33 @@ void Player::onFallIntoVoid() {
 	printf("player fell into void... sad :(\n");
 	level->activePlayer = nullptr;
 	Object::onFallIntoVoid();
+}
+
+void Player::plantBomb(sf::Vector2i dir, bool active) {
+	if (bombs > 0) {
+
+		sf::Vector2i plantPos = position + dir;
+
+		if (getObjectAt(plantPos) == nullptr) {
+			//printf("planting bomb\n");
+			Object* obj = new Bomb(level, plantPos, 41, active);
+			level->tileMap->setObjectAt(plantPos, obj);
+			level->objects.push_back(obj);
+			bombs--;
+			// zrob porzadek z pamiecia
+		}
+		
+	}
+}
+
+
+
+
+void Player::showProperties() {
+	std::cout << "\nObjects: " << level->objects.size() << '\n';
+	std::cout << "Keys: " << keys.size() << "\nKey ids : ";
+	for (int i : keys) std::cout << i << " ";
+	std::cout << '\n';
+	std::cout << "Bombs: " << bombs << '\n';
 }
 

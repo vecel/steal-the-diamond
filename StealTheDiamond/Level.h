@@ -15,6 +15,8 @@ public:
 	void loadFromFile(std::string path);
 	void draw();
 
+	void updateLevel();
+
 	void addObjectToRemove(Object* obj);
 	void removeOldObj();
 

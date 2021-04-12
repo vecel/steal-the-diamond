@@ -26,9 +26,7 @@ int main()
 
         window.clear();
 
-        if(level.activePlayer != nullptr) level.activePlayer->update();
-
-        level.removeOldObj();
+        level.updateLevel();
 
         level.draw();
 

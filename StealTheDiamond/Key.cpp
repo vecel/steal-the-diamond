@@ -6,7 +6,7 @@ Key::Key(Level* level, sf::Vector2i pos, int id, int keyId) : Object(level, pos,
 	if (!texture.loadFromFile("textures\\keys.png", sf::IntRect(0, 0, 32, 32))) printf("Cannot load key texture\n");
 	sprite.setTexture(texture);
 
-	flags = MOVABLE | COLLECTABLE;
+	flags = MOVABLE | COLLECTABLE | DESTROYABLE;
 	this->keyId = keyId;
 }
 

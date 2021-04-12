@@ -8,7 +8,7 @@ Diamond::Diamond(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id
 	}
 	sprite.setTexture(texture);
 
-	flags = MOVABLE | COLLECTABLE;
+	flags = MOVABLE | COLLECTABLE | DESTROYABLE;
 }
 
 Diamond::~Diamond() {

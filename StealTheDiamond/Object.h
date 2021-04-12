@@ -9,9 +9,10 @@ class Object: public sf::Drawable
 public:
 	enum Flags : unsigned int {
 		MOVABLE = 1,
-		WATER_REPLACABLE = 2,
-		INTERACTIVE = 4,
-		COLLECTABLE = 8
+		DESTROYABLE = 2,
+		WATER_REPLACABLE = 4,
+		INTERACTIVE = 8,
+		COLLECTABLE = 16
 		// add flags when needed with values of the form 2 to the power of (i)
 	};
 
@@ -33,10 +34,15 @@ public:
 	virtual void onFallIntoVoid();
 	virtual void onCollect();
 	virtual void onInteract();
+	virtual void onExplode();
+	virtual void update();
 
-protected:
+	void removeObject(); // remove itself
+
 	Object* getObjectAt(sf::Vector2i pos);
-
 	int getGroundTypeAt(sf::Vector2i pos);
+
+	bool isPositionValid(sf::Vector2i pos);
+	bool isObjectAt(sf::Vector2i pos);
 };
 

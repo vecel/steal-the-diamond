@@ -7,6 +7,7 @@
 #include "Diamond.h"
 #include "Key.h"
 #include "Door.h"
+#include "Bomb.h"
 
 const float Level::tileSize = 32.0f;
 
@@ -48,6 +49,12 @@ void Level::loadFromFile(std::string path) {
 
 void Level::draw() { tileMap->draw(); }
 
+void Level::updateLevel() {
+	//if (activePlayer != nullptr) activePlayer->update();
+	for (Object* obj : objects) if (obj != nullptr) obj->update();
+	removeOldObj();
+}
+
 void Level::addObjectToRemove(Object* obj) {
 	objToRemove.push_back(obj);
 }
@@ -85,6 +92,8 @@ void Level::setUpObjectTextures() {
 	objectTextures[17] = sf::Vector2i(0, 2 * tileSize); // box
 	objectTextures[21] = sf::Vector2i(4 * tileSize, 2 * tileSize);
 	objectTextures[33] = sf::Vector2i(0, 4 * tileSize);
+	objectTextures[41] = sf::Vector2i(0, 5 * tileSize); // bomb
+	objectTextures[42] = sf::Vector2i(tileSize, 5 * tileSize); // active bomb
 
 	objectTextures[99] = sf::Vector2i(tileSize, tileSize); // temporary blank tile
 }
@@ -116,6 +125,10 @@ void Level::loadObjects(std::fstream& levelData) {
 			}
 			else if (objId > 32 && objId <= 40) {
 				Object* obj = new Door(this, position, objId, 1);
+				objects.push_back(obj);
+			}
+			else if (objId == 41) {
+				Object* obj = new Bomb(this, position, objId);
 				objects.push_back(obj);
 			}
 			else if (objId == 99) {

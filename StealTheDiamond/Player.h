@@ -16,7 +16,13 @@ public:
 	bool onSink();
 	void onFallIntoVoid();
 
+	void plantBomb(sf::Vector2i dir, bool active);
+
 	sf::Vector2i velocity;
 	std::vector<int> keys;
+	int bombs;
+
+private:
+	void showProperties(); // for debug
 };
 

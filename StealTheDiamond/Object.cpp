@@ -74,15 +74,13 @@ bool Object::onSink() {
 	}
 	else {
 		printf("drowned\n");
-		level->tileMap->setObjectAt(position, nullptr); // mozna przeniesc do level.cpp
-		level->addObjectToRemove(this);
+		removeObject();
 		return false;
 	}
 }
 
 void Object::onFallIntoVoid() {
-	level->tileMap->setObjectAt(position, nullptr);
-	level->addObjectToRemove(this);
+	removeObject();
 }
 
 void Object::onCollect() {
@@ -92,10 +90,35 @@ void Object::onInteract() {
 
 }
 
+void Object::onExplode() {
+	if (flags & DESTROYABLE) {
+		removeObject();
+	}
+}
+
+void Object::update() {
+
+}
+
+void Object::removeObject() {
+	level->tileMap->removeObjectAt(position);
+	level->addObjectToRemove(this);
+}
+
 Object* Object::getObjectAt(sf::Vector2i pos) {
 	return level->tileMap->getObjectAt(pos);
 }
 
 int Object::getGroundTypeAt(sf::Vector2i pos) {
 	return level->tileMap->getGroundTypeAt(pos);
+}
+
+bool Object::isPositionValid(sf::Vector2i pos) {
+	int index = pos.x + pos.y * TileMap::WIDTH;
+	return index >= 0 && index < TileMap::WIDTH * TileMap::HEIGHT;
+}
+
+bool Object::isObjectAt(sf::Vector2i pos) {
+	if (!isPositionValid(pos)) return false;
+	return getObjectAt(pos) != nullptr;
 }
