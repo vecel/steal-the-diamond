@@ -51,6 +51,9 @@
     <ClCompile Include="Bomb.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -89,6 +92,9 @@
     <ClInclude Include="Bomb.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="StealTheDiamond.rc">
@@ -100,6 +106,9 @@
       <Filter>Pliki zasobów</Filter>
     </Text>
     <Text Include="levels\test-level-2.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
+    <Text Include="levels\level-3.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
   </ItemGroup>
@@ -129,6 +138,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\object-assets.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\bomb-anim.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

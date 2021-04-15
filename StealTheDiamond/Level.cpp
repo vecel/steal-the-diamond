@@ -13,6 +13,7 @@ const float Level::tileSize = 32.0f;
 
 Level::Level(sf::RenderWindow* window, std::string filePath) {
 	tileMap = new TileMap(window, "textures\\ground-assets.png");
+	clock.restart();
 
 	setUpObjectTextures();
 	loadFromFile(filePath);
@@ -50,8 +51,8 @@ void Level::loadFromFile(std::string path) {
 void Level::draw() { tileMap->draw(); }
 
 void Level::updateLevel() {
-	//if (activePlayer != nullptr) activePlayer->update();
-	for (Object* obj : objects) if (obj != nullptr) obj->update();
+	double elapsed = clock.getElapsedTime().asMilliseconds();
+	for (Object* obj : objects) if (obj != nullptr) obj->update(elapsed);
 	removeOldObj();
 }
 
@@ -87,8 +88,12 @@ void Level::setUpObjectTextures() {
 
 	// objectTextures[0] - there is no texture for empty object
 	objectTextures[1] = sf::Vector2i(0, 0); // simple wall
-	objectTextures[3] = sf::Vector2i(2 * tileSize, 0);
+	objectTextures[2] = sf::Vector2i(tileSize, 0); // dragon relief
+	objectTextures[3] = sf::Vector2i(2 * tileSize, 0); // stone wall
+	objectTextures[8] = sf::Vector2i(7 * tileSize, 0); // snowy wall
 	objectTextures[9] = sf::Vector2i(0, tileSize); // broken wall
+	objectTextures[11] = sf::Vector2i(2 * tileSize, tileSize); // broken stone wall
+	objectTextures[16] = sf::Vector2i(7 * tileSize, tileSize); // broken snowy wall
 	objectTextures[17] = sf::Vector2i(0, 2 * tileSize); // box
 	objectTextures[21] = sf::Vector2i(4 * tileSize, 2 * tileSize);
 	objectTextures[33] = sf::Vector2i(0, 4 * tileSize);

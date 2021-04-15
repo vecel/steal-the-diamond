@@ -10,8 +10,18 @@ Bomb::Bomb(Level* level, sf::Vector2i pos, int id, bool active) : Object(level, 
 		flags |= COLLECTABLE;
 	}
 	else {
-		clock.restart();
-		plantTime = clock.getElapsedTime().asMilliseconds();
+		id = -1;
+		plantTime = getElapsedTime();
+
+		if (!texture.loadFromFile("textures\\bomb-anim.png")) printf("Cannot load bomb animation texture\n");
+		sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
+		animation = new Animation(this);
+
+		animation->addFrame({ sf::IntRect(0, 0, 32, 32), 500.0 });
+		animation->addFrame({ sf::IntRect(32, 0, 32, 32), 500.0 });
+		animation->addFrame({ sf::IntRect(64, 0, 32, 32), 500.0 });
+		animation->addFrame({ sf::IntRect(96, 0, 32, 32), 500.0 });
 	}
 }
 
@@ -43,8 +53,10 @@ void Bomb::onExplode() {
 	printf("Bomb exploded\n");
 }
 
-void Bomb::update() {
+void Bomb::update(double elapsed) {
 	if (active) {
-		if (clock.getElapsedTime().asMilliseconds() - plantTime >= 3000) onExplode(); // explode after 3 sec
+		animation->update(elapsed - plantTime);
+		// std::cout << "Bomb: \nelapsed time: " << elapsed << "\nplant time: " << plantTime << "\nanimation update(" << elapsed - plantTime << ")\n";
+		if (elapsed - plantTime >= explosionTime) onExplode(); // explode after 3 sec
 	}
 }

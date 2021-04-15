@@ -1,5 +1,7 @@
 #pragma once
 #include "Object.h"
+#include "Animation.h"
+
 class Bomb : public Object
 {
 public:
@@ -9,10 +11,11 @@ public:
 	void onCollect();
 	void onExplode();
 
-	void update();
+	void update(double elapsed);
 
+	double explosionTime = 2000.0;
 	bool active;
 	float plantTime;
-	sf::Clock clock;
+	Animation* animation;
 };
 

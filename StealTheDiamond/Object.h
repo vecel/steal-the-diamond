@@ -21,12 +21,7 @@ public:
 	Object(Level* l, sf::Vector2i pos, int objId);
 	virtual ~Object() = 0;
 
-	Level* level;
-	sf::Vector2i position;
-	sf::Sprite sprite;
-	sf::Texture texture;
-	unsigned int flags;
-	bool moved;
+	//void setTextureRect(const sf::IntRect& rectangle);
 	
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual bool move(sf::Vector2i dir);
@@ -35,12 +30,20 @@ public:
 	virtual void onCollect();
 	virtual void onInteract();
 	virtual void onExplode();
-	virtual void update();
+	virtual void update(double elapsed);
+
+	Level* level;
+	sf::Vector2i position;
+	sf::Sprite sprite;
+	sf::Texture texture;
+	unsigned int flags;
+	bool moved;
 
 	void removeObject(); // remove itself
 
 	Object* getObjectAt(sf::Vector2i pos);
 	int getGroundTypeAt(sf::Vector2i pos);
+	double getElapsedTime();
 
 	bool isPositionValid(sf::Vector2i pos);
 	bool isObjectAt(sf::Vector2i pos);

@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Box.cpp" />
     <ClCompile Include="Diamond.cpp" />
@@ -159,6 +160,7 @@
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Bomb.h" />
     <ClInclude Include="Box.h" />
     <ClInclude Include="Diamond.h" />
@@ -176,10 +178,12 @@
     <ResourceCompile Include="StealTheDiamond.rc" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="levels\level-3.txt" />
     <Text Include="levels\test-level-2.txt" />
     <Text Include="levels\test-level.txt" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="textures\bomb-anim.png" />
     <Image Include="textures\diamond.png" />
     <Image Include="textures\exit.png" />
     <Image Include="textures\ground-assets.png" />

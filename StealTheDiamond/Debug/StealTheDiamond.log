@@ -1,2 +1,3 @@
-﻿  Wall.cpp
+﻿  Bomb.cpp
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Bomb.cpp(14,29): warning C4244: "=": konwersja z "double" do "float", możliwa utrata danych
   StealTheDiamond.vcxproj -> C:\Users\Mati\source\repos\StealTheDiamond\Debug\StealTheDiamond.exe

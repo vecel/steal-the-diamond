@@ -96,7 +96,7 @@ void Object::onExplode() {
 	}
 }
 
-void Object::update() {
+void Object::update(double elapsed) {
 
 }
 
@@ -111,6 +111,10 @@ Object* Object::getObjectAt(sf::Vector2i pos) {
 
 int Object::getGroundTypeAt(sf::Vector2i pos) {
 	return level->tileMap->getGroundTypeAt(pos);
+}
+
+double Object::getElapsedTime() {
+	return level->clock.getElapsedTime().asMilliseconds();
 }
 
 bool Object::isPositionValid(sf::Vector2i pos) {

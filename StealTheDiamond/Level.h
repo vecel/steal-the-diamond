@@ -22,6 +22,7 @@ public:
 
 	sf::Vector2i getTextureStartingPoint(int id);
 
+	sf::Clock clock;
 	TileMap* tileMap;
 	std::vector<Object*> objects;
 	std::vector<Object*> objToRemove;
