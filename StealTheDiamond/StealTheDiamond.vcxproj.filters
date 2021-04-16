@@ -54,6 +54,9 @@
     <ClCompile Include="Animation.cpp">
       <Filter>Pliki źródłowe</Filter>
     </ClCompile>
+    <ClCompile Include="Portal.cpp">
+      <Filter>Pliki źródłowe</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Object.h">
@@ -93,6 +96,9 @@
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
+      <Filter>Pliki nagłówkowe</Filter>
+    </ClInclude>
+    <ClInclude Include="Portal.h">
       <Filter>Pliki nagłówkowe</Filter>
     </ClInclude>
   </ItemGroup>
@@ -141,6 +147,9 @@
       <Filter>Pliki zasobów</Filter>
     </Image>
     <Image Include="textures\bomb-anim.png">
+      <Filter>Pliki zasobów</Filter>
+    </Image>
+    <Image Include="textures\object-0-assets.png">
       <Filter>Pliki zasobów</Filter>
     </Image>
   </ItemGroup>

@@ -26,10 +26,7 @@ bool Player::move(sf::Vector2i dir) {
 			
 			// simple move code
 			if (!moved) {
-				level->tileMap->setObjectAt(newPos, this);
-				level->tileMap->removeObjectAt(position);
-				position = newPos;
-				sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
+				setPosition(newPos);
 				moved = true;
 			}
 

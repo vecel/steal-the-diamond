@@ -8,6 +8,7 @@
 #include "Key.h"
 #include "Door.h"
 #include "Bomb.h"
+#include "Portal.h"
 
 const float Level::tileSize = 32.0f;
 
@@ -83,8 +84,13 @@ sf::Vector2i Level::getTextureStartingPoint(int id) {
 
 
 void Level::setUpObjectTextures() {
-	int txtCount = 128;
+	int txtCount = 256;
 	objectTextures.resize(txtCount);
+
+	/* 
+		Objects with id greater than 99 load their textures from another file
+		so values in array might be the same for different indexes
+	*/
 
 	// objectTextures[0] - there is no texture for empty object
 	objectTextures[1] = sf::Vector2i(0, 0); // simple wall
@@ -100,10 +106,30 @@ void Level::setUpObjectTextures() {
 	objectTextures[41] = sf::Vector2i(0, 5 * tileSize); // bomb
 	objectTextures[42] = sf::Vector2i(tileSize, 5 * tileSize); // active bomb
 
-	objectTextures[99] = sf::Vector2i(tileSize, tileSize); // temporary blank tile
+	objectTextures[99] = sf::Vector2i(tileSize, tileSize); // temporary blank tile - diamond load texture itself
+
+	objectTextures[100] = sf::Vector2i(0, 0); // portal
 }
 
 void Level::loadObjects(std::fstream& levelData) {
+
+	int objAtLayer0;
+	levelData.ignore(1000, ':');
+	levelData >> objAtLayer0;
+
+	for (int i = 0; i < objAtLayer0; ++i) {
+		int objId;
+		sf::Vector2i position;
+
+		levelData >> objId >> position.x >> position.y;
+
+		if (objId == 100) {
+			sf::Vector2i dest;
+			levelData >> dest.x >> dest.y;
+			Object* obj = new Portal(this, position, objId, dest);
+			objects.push_back(obj);
+		}
+	}
 
 	for (int i = 0; i < tileMap->HEIGHT; ++i) {
 		for (int j = 0; j < tileMap->WIDTH; ++j) {
@@ -112,7 +138,7 @@ void Level::loadObjects(std::fstream& levelData) {
 
 			sf::Vector2i position(j, i);
 
-			if (objId > 0 && objId <= 16) {
+			if		(objId > 0 && objId <= 16) {
 				Object* obj = new Wall(this, position, objId);
 				objects.push_back(obj);
 			}

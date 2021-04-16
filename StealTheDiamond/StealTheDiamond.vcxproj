@@ -156,6 +156,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Portal.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
@@ -170,6 +171,7 @@
     <ClInclude Include="Level.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Portal.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="Wall.h" />
@@ -188,6 +190,7 @@
     <Image Include="textures\exit.png" />
     <Image Include="textures\ground-assets.png" />
     <Image Include="textures\keys.png" />
+    <Image Include="textures\object-0-assets.png" />
     <Image Include="textures\object-assets.png" />
     <Image Include="textures\player-yellow.png" />
     <Image Include="textures\player.png" />

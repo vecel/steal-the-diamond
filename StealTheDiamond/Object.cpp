@@ -6,6 +6,9 @@
 
 class TileMap;
 
+float Object::size = 32.0f;
+sf::Vector2f Object::transform(10.0f, 10.0f);
+
 Object::Object(Level* l, sf::Vector2i pos, int objId, int layer) {
 	position = pos;
 	this->layer = layer;
@@ -17,7 +20,12 @@ Object::Object(Level* l, sf::Vector2i pos, int objId, int layer) {
 		sf::Vector2i txtPix = level->getTextureStartingPoint(objId);
 		sf::IntRect txtRect(txtPix, sf::Vector2i(size, size));
 
-		if (!texture.loadFromFile("textures\\object-assets.png", txtRect)) printf("Cannot load texture\n");
+		if (objId < 100) {
+			if (!texture.loadFromFile("textures\\object-assets.png", txtRect)) printf("Cannot load texture\n");
+		}
+		else if (objId >= 100) {
+			if (!texture.loadFromFile("textures\\object-0-assets.png", txtRect)) printf("Cannot load texture\n");
+		}
 
 		sprite.setTexture(texture);
 	}
@@ -41,10 +49,8 @@ bool Object::move(sf::Vector2i dir){
 	if (nextObj == nullptr) {
 		// if object at newPos is movable then call it's move method with the same dir parameter
 		if (!moved) {
-			level->tileMap->setObjectAt(newPos, this);
-			level->tileMap->removeObjectAt(position);
-			position = newPos;
-			sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
+			
+			setPosition(newPos);
 			moved = true;
 		}
 	}
@@ -104,6 +110,13 @@ void Object::update(double elapsed) {
 void Object::removeObject() {
 	level->tileMap->removeObjectAt(position);
 	level->addObjectToRemove(this);
+}
+
+void Object::setPosition(sf::Vector2i pos) {
+	level->tileMap->setObjectAt(pos, this);
+	level->tileMap->removeObjectAt(position);
+	position = pos;
+	sprite.setPosition(transform.x + size * position.x, transform.y + size * position.y);
 }
 
 Object* Object::getObjectAt(sf::Vector2i pos, int layer) {
