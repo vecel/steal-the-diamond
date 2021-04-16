@@ -19,7 +19,7 @@ TileMap::~TileMap() {
 	printf("TileMap destructor\n");
 }
 
-bool TileMap::loadLayer0(std::fstream& levelData, int tileSize) {
+bool TileMap::loadBackground(std::fstream& levelData, int tileSize) {
 
 	int exitX, exitY;
 
@@ -45,7 +45,7 @@ bool TileMap::loadLayer0(std::fstream& levelData, int tileSize) {
 			else if (tileType == 49) ground = WATER;
 			else if (tileType == 60) ground = BOX_IN_WATER;
 			
-			layer0[j + i * WIDTH] = ground;
+			backgroundLayer[j + i * WIDTH] = ground;
 
 			sf::Vector2f txtPix;
 
@@ -75,20 +75,21 @@ bool TileMap::loadLayer0(std::fstream& levelData, int tileSize) {
 	return true;
 }
 
-void TileMap::loadLayer1(std::vector<Object*> objects) {
-	for (Object* obj : objects) layer1[obj->position.x + obj->position.y * WIDTH] = obj;
+void TileMap::loadObjects(std::vector<Object*> objects) {
+	for (Object* obj : objects) 
+		objectsLayer[obj->position.x + obj->position.y * WIDTH + obj->layer * WIDTH * HEIGHT] = obj;
 }
 
-void TileMap::setObjectAt(sf::Vector2i pos, Object* obj) {
-	layer1[pos.x + pos.y * WIDTH] = obj;
+void TileMap::setObjectAt(sf::Vector2i pos, Object* obj, int layer) {
+	objectsLayer[pos.x + pos.y * WIDTH + layer * WIDTH * HEIGHT] = obj;
 }
 
 void TileMap::fillWater(sf::Vector2i pos) {
 
-	if (layer0[pos.x + pos.y * WIDTH] == WATER) {
+	if (backgroundLayer[pos.x + pos.y * WIDTH] == WATER) {
 		std::cout << "water " << pos.x << " " << pos.y << '\n';
 
-		layer0[pos.x + pos.y * WIDTH] = BOX_IN_WATER;
+		backgroundLayer[pos.x + pos.y * WIDTH] = BOX_IN_WATER;
 
 		sf::Vertex* quad = &backgroundTiles[(pos.x + pos.y * WIDTH) * 4];
 
@@ -103,11 +104,11 @@ void TileMap::fillWater(sf::Vector2i pos) {
 
 void TileMap::showExit() {
 	isExitShown = true;
-	layer0[exit->position.x + exit->position.y * WIDTH] = EXIT;
+	backgroundLayer[exit->position.x + exit->position.y * WIDTH] = EXIT;
 }
 
-void TileMap::removeObjectAt(sf::Vector2i pos) {
-	layer1[pos.x + pos.y * WIDTH] = nullptr;
+void TileMap::removeObjectAt(sf::Vector2i pos, int layer) {
+	objectsLayer[pos.x + pos.y * WIDTH + layer * WIDTH * HEIGHT] = nullptr;
 }
 
 void TileMap::draw() {
@@ -116,7 +117,7 @@ void TileMap::draw() {
 
 	if(isExitShown) window->draw(*exit);
 
-	for (Object* obj : layer1) if(obj != nullptr) obj->draw(*window, sf::RenderStates::Default);
+	for (Object* obj : objectsLayer) if(obj != nullptr) obj->draw(*window, sf::RenderStates::Default);
 
 }
 
@@ -125,12 +126,12 @@ void TileMap::clear() {
 	printf("tileMap cleared\n");
 }
 
-Object* TileMap::getObjectAt(sf::Vector2i pos) {
-	return layer1[pos.x + pos.y * WIDTH];
+Object* TileMap::getObjectAt(sf::Vector2i pos, int layer) {
+	return objectsLayer[pos.x + pos.y * WIDTH + layer * WIDTH * HEIGHT];
 }
 
 int TileMap::getGroundTypeAt(sf::Vector2i pos) {
-	return layer0[pos.x + pos.y * WIDTH];
+	return backgroundLayer[pos.x + pos.y * WIDTH];
 }
 
 

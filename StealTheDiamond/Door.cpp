@@ -1,7 +1,7 @@
 #include "Door.h"
 #include "Level.h"
 
-Door::Door(Level* level, sf::Vector2i pos, int objId, int keyId) : Object(level, pos, objId) {
+Door::Door(Level* level, sf::Vector2i pos, int objId, int keyId, int layer) : Object(level, pos, objId, layer) {
 
 	key = keyId;
 	open = false;

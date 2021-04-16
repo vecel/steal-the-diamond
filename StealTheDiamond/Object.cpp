@@ -6,8 +6,9 @@
 
 class TileMap;
 
-Object::Object(Level* l, sf::Vector2i pos, int objId) {
+Object::Object(Level* l, sf::Vector2i pos, int objId, int layer) {
 	position = pos;
+	this->layer = layer;
 	level = l;
 	moved = false;
 	sprite.setPosition(sf::Vector2f(10.0f + size * position.x, 10.0f + size * position.y));
@@ -105,8 +106,8 @@ void Object::removeObject() {
 	level->addObjectToRemove(this);
 }
 
-Object* Object::getObjectAt(sf::Vector2i pos) {
-	return level->tileMap->getObjectAt(pos);
+Object* Object::getObjectAt(sf::Vector2i pos, int layer) {
+	return level->tileMap->getObjectAt(pos, layer);
 }
 
 int Object::getGroundTypeAt(sf::Vector2i pos) {
@@ -122,7 +123,7 @@ bool Object::isPositionValid(sf::Vector2i pos) {
 	return index >= 0 && index < TileMap::WIDTH * TileMap::HEIGHT;
 }
 
-bool Object::isObjectAt(sf::Vector2i pos) {
+bool Object::isObjectAt(sf::Vector2i pos, int layer) {
 	if (!isPositionValid(pos)) return false;
-	return getObjectAt(pos) != nullptr;
+	return getObjectAt(pos, layer) != nullptr;
 }

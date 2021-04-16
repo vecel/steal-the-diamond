@@ -37,11 +37,11 @@ void Level::loadFromFile(std::string path) {
 		levelData.ignore(1000, ':'); // ignore descriptions in level data file
 		levelData >> diamondsToCollect;
 
-		tileMap->loadLayer0(levelData);
+		tileMap->loadBackground(levelData);
 
 		loadObjects(levelData);
 
-		tileMap->loadLayer1(objects);
+		tileMap->loadObjects(objects);
 
 	}
 
@@ -104,6 +104,7 @@ void Level::setUpObjectTextures() {
 }
 
 void Level::loadObjects(std::fstream& levelData) {
+
 	for (int i = 0; i < tileMap->HEIGHT; ++i) {
 		for (int j = 0; j < tileMap->WIDTH; ++j) {
 			int objId;

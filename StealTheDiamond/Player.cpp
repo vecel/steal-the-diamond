@@ -4,7 +4,7 @@
 #include "Wall.h"
 #include "Bomb.h"
 
-Player::Player(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id) {
+Player::Player(Level* level, sf::Vector2i pos, int id, int layer) : Object(level, pos, id, layer) {
 	flags = MOVABLE | DESTROYABLE;
 	bombs = 0;
 }
@@ -98,7 +98,7 @@ void Player::plantBomb(sf::Vector2i dir, bool active) {
 
 		if (getObjectAt(plantPos) == nullptr) {
 			//printf("planting bomb\n");
-			Object* obj = new Bomb(level, plantPos, 41, active);
+			Object* obj = new Bomb(level, plantPos, 41, 1, active);
 			level->tileMap->setObjectAt(plantPos, obj);
 			level->objects.push_back(obj);
 			bombs--;

@@ -26,19 +26,19 @@ public:
 	TileMap(sf::RenderWindow* window, std::string txtAsset);
 	~TileMap();
 
-	bool loadLayer0(std::fstream& levelData, int tileSize = 32);
-	void loadLayer1(std::vector<Object*> objects);
+	bool loadBackground(std::fstream& levelData, int tileSize = 32);
+	void loadObjects(std::vector<Object*> objects);
 
-	void setObjectAt(sf::Vector2i pos, Object* obj);
+	void setObjectAt(sf::Vector2i pos, Object* obj, int layer = 1);
 
 	void fillWater(sf::Vector2i pos);
 	void showExit();
 
-	void removeObjectAt(sf::Vector2i pos);
+	void removeObjectAt(sf::Vector2i pos, int layer = 1);
 	void draw();
 	void clear(); // <-TODO
 
-	Object* getObjectAt(sf::Vector2i pos);
+	Object* getObjectAt(sf::Vector2i pos, int layer = 1);
 	int getGroundTypeAt(sf::Vector2i pos);
 
 	Exit* exit;
@@ -48,11 +48,15 @@ private:
 	sf::RenderWindow* window;
 	void setUpTexturesMap();
 
-	// objects layer
-	Object* layer1[HEIGHT * WIDTH];
+	/*
+		objects layer first HEIGHT*WIDTH objects are layer 0, second HEIGHT*WIDTH objects are layer 1
+		layer0 stores objects that player (or other objects) can stand on
+		layer1 stores other objects
+	*/
+	Object* objectsLayer[HEIGHT * WIDTH * 2];
 
 	// background layer
-	int layer0[HEIGHT * WIDTH];
+	int backgroundLayer[HEIGHT * WIDTH];
 
 	sf::Texture tilesAsset;
 	sf::VertexArray backgroundTiles;

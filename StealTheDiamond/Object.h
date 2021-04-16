@@ -18,7 +18,7 @@ public:
 
 	/*static*/ const float size = 32.0f;
 
-	Object(Level* l, sf::Vector2i pos, int objId);
+	Object(Level* l, sf::Vector2i pos, int objId, int layer);
 	virtual ~Object() = 0;
 
 	//void setTextureRect(const sf::IntRect& rectangle);
@@ -34,6 +34,7 @@ public:
 
 	Level* level;
 	sf::Vector2i position;
+	int layer;
 	sf::Sprite sprite;
 	sf::Texture texture;
 	unsigned int flags;
@@ -41,11 +42,11 @@ public:
 
 	void removeObject(); // remove itself
 
-	Object* getObjectAt(sf::Vector2i pos);
+	Object* getObjectAt(sf::Vector2i pos, int layer = 1);
 	int getGroundTypeAt(sf::Vector2i pos);
 	double getElapsedTime();
 
 	bool isPositionValid(sf::Vector2i pos);
-	bool isObjectAt(sf::Vector2i pos);
+	bool isObjectAt(sf::Vector2i pos, int layer = 1);
 };
 

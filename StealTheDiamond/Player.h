@@ -7,7 +7,7 @@ class Level;
 class Player : public Object
 {
 public:
-	Player(Level* level, sf::Vector2i pos, int id);
+	Player(Level* level, sf::Vector2i pos, int id, int layer = 1);
 	~Player();
 
 	bool move(sf::Vector2i dir);

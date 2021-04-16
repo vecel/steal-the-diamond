@@ -5,7 +5,7 @@
 class Bomb : public Object
 {
 public:
-	Bomb(Level* level, sf::Vector2i pos, int id, bool active = false);
+	Bomb(Level* level, sf::Vector2i pos, int id, int layer = 1, bool active = false);
 	~Bomb();
 
 	void onCollect();

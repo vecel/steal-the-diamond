@@ -1,7 +1,7 @@
 #include "Diamond.h"
 #include "Level.h"
 
-Diamond::Diamond(Level* level, sf::Vector2i pos, int id) : Object(level, pos, id) {
+Diamond::Diamond(Level* level, sf::Vector2i pos, int id, int layer) : Object(level, pos, id, layer) {
 
 	if (!texture.loadFromFile("textures\\diamond.png")) {
 		printf("Cannot load diamond texture\n");
