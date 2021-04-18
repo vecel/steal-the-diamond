@@ -26,7 +26,7 @@ bool Player::move(sf::Vector2i dir) {
 			
 			// simple move code
 			if (!moved) {
-				setPosition(newPos);
+				updatePosition(newPos);
 				moved = true;
 			}
 

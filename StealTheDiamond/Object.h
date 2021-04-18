@@ -16,7 +16,7 @@ public:
 		// add flags when needed with values of the form 2 to the power of (i)
 	};
 
-	static float size;
+	static int size;
 	static sf::Vector2f transform; 
 
 	Object(Level* l, sf::Vector2i pos, int objId, int layer);
@@ -43,7 +43,10 @@ public:
 
 	void removeObject(); // remove itself
 
-	void setPosition(sf::Vector2i pos);
+	/* 
+		moves object to given position 
+	*/
+	void updatePosition(sf::Vector2i pos); // test
 
 	Object* getObjectAt(sf::Vector2i pos, int layer = 1);
 	int getGroundTypeAt(sf::Vector2i pos);

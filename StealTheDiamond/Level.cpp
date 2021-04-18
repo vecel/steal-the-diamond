@@ -109,6 +109,8 @@ void Level::setUpObjectTextures() {
 	objectTextures[99] = sf::Vector2i(tileSize, tileSize); // temporary blank tile - diamond load texture itself
 
 	objectTextures[100] = sf::Vector2i(0, 0); // portal
+	objectTextures[101] = sf::Vector2i(4 * tileSize, 0); // player portal
+	objectTextures[102] = sf::Vector2i(0, tileSize); // objects portal
 }
 
 void Level::loadObjects(std::fstream& levelData) {
@@ -123,7 +125,7 @@ void Level::loadObjects(std::fstream& levelData) {
 
 		levelData >> objId >> position.x >> position.y;
 
-		if (objId == 100) {
+		if (objId >= 100 && objId <= 102) {
 			sf::Vector2i dest;
 			levelData >> dest.x >> dest.y;
 			Object* obj = new Portal(this, position, objId, dest);

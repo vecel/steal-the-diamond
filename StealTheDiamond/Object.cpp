@@ -6,7 +6,7 @@
 
 class TileMap;
 
-float Object::size = 32.0f;
+int Object::size = 32;
 sf::Vector2f Object::transform(10.0f, 10.0f);
 
 Object::Object(Level* l, sf::Vector2i pos, int objId, int layer) {
@@ -50,7 +50,7 @@ bool Object::move(sf::Vector2i dir){
 		// if object at newPos is movable then call it's move method with the same dir parameter
 		if (!moved) {
 			
-			setPosition(newPos);
+			updatePosition(newPos);
 			moved = true;
 		}
 	}
@@ -112,7 +112,7 @@ void Object::removeObject() {
 	level->addObjectToRemove(this);
 }
 
-void Object::setPosition(sf::Vector2i pos) {
+void Object::updatePosition(sf::Vector2i pos) {
 	level->tileMap->setObjectAt(pos, this);
 	level->tileMap->removeObjectAt(position);
 	position = pos;
