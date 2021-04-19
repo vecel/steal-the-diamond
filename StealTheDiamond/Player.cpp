@@ -13,6 +13,38 @@ Player::~Player() {
 	printf("Player destructor\n");
 }
 
+void Player::update(double elapsed) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) showProperties();
+
+	// planting active bombs
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) plantBomb(sf::Vector2i(-1, 0), true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) plantBomb(sf::Vector2i(1, 0), true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) plantBomb(sf::Vector2i(0, -1), true);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) plantBomb(sf::Vector2i(0, 1), true);
+		return;
+	}
+
+	// planting inactive bombs
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) plantBomb(sf::Vector2i(-1, 0), false);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) plantBomb(sf::Vector2i(1, 0), false);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) plantBomb(sf::Vector2i(0, -1), false);
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) plantBomb(sf::Vector2i(0, 1), false);
+		return;
+	}
+
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(sf::Vector2i(-1, 0));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) move(sf::Vector2i(1, 0));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(sf::Vector2i(0, -1));
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(sf::Vector2i(0, 1));
+
+	if (getGroundTypeAt(position) == TileMap::WATER) onSink();
+	if (getGroundTypeAt(position) == TileMap::VOID) onFallIntoVoid();
+	if (getGroundTypeAt(position) == TileMap::EXIT) printf("Exit reached\n");
+}
+
 bool Player::move(sf::Vector2i dir) { 
 	moved = false;
 
@@ -56,36 +88,6 @@ void Player::onFallIntoVoid() {
 	printf("player fell into void... sad :(\n");
 	level->activePlayer = nullptr;
 	Object::onFallIntoVoid();
-}
-
-void Player::update(double elapsed) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) showProperties();
-
-	// planting active bombs
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) plantBomb(sf::Vector2i(-1, 0), true);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) plantBomb(sf::Vector2i(1, 0), true);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) plantBomb(sf::Vector2i(0, -1), true);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) plantBomb(sf::Vector2i(0, 1), true);
-		return;
-	}
-
-	// planting inactive bombs
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LControl)) {
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) plantBomb(sf::Vector2i(-1, 0), false);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) plantBomb(sf::Vector2i(1, 0), false);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) plantBomb(sf::Vector2i(0, -1), false);
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) plantBomb(sf::Vector2i(0, 1), false);
-		return;
-	}
-
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(sf::Vector2i(-1, 0));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) move(sf::Vector2i(1, 0));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(sf::Vector2i(0, -1));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(sf::Vector2i(0, 1));
-
-	if (getGroundTypeAt(position) == TileMap::EXIT) printf("Exit reached\n");
 }
 
 void Player::plantBomb(sf::Vector2i dir, bool active) {

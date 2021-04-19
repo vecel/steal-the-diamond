@@ -36,6 +36,20 @@ Object::~Object()
 
 }
 
+void Object::onRender() {
+
+}
+
+void Object::update(double elapsed) {
+	if (getGroundTypeAt(position) == TileMap::WATER) {
+		onSink();
+	}
+
+	if (getGroundTypeAt(position) == TileMap::VOID) {
+		onFallIntoVoid();
+	}
+}
+
 void Object::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(this->sprite, states);
 }
@@ -57,16 +71,6 @@ bool Object::move(sf::Vector2i dir){
 	else if (nextObj->flags & MOVABLE) {
 		printf("movable object obj\n");
 		if (nextObj->move(dir)) move(dir);
-	}
-
-	if (getGroundTypeAt(position) == TileMap::WATER) {
-		onSink();
-		return true;
-	}
-
-	if (getGroundTypeAt(position) == TileMap::VOID) {
-		onFallIntoVoid();
-		return true;
 	}
 
 	return moved;
@@ -101,10 +105,6 @@ void Object::onExplode() {
 	if (flags & DESTROYABLE) {
 		removeObject();
 	}
-}
-
-void Object::update(double elapsed) {
-
 }
 
 void Object::removeObject() {

@@ -10,10 +10,11 @@ public:
 	Player(Level* level, sf::Vector2i pos, int id, int layer = 1);
 	~Player();
 
+	void update(double elapsed);
+
 	bool move(sf::Vector2i dir);
 	bool onSink();
 	void onFallIntoVoid();
-	void update(double elapsed);
 
 	void plantBomb(sf::Vector2i dir, bool active);
 

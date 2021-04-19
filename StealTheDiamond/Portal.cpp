@@ -17,6 +17,18 @@ Portal::~Portal() {
 
 }
 
+void Portal::update(double elapsed) {
+	// update animation
+	//animation->update(std::fmod(elapsed, animation->getLength())); 
+
+	// set portal inactive for 1 second after teleporting something
+	if (elapsed - lastUse >= inactiveTime) {
+		// check if there is object in portal (same position, layer up)
+		if (getObjectAt(position) != nullptr) onInteract(elapsed);
+	}
+
+}
+
 void Portal::onInteract(double elapsed) {
 
 	if (getObjectAt(destination) == nullptr) {
@@ -40,18 +52,6 @@ void Portal::onInteract(double elapsed) {
 		lastUse = elapsed;
 		// play sound
 	}
-}
-
-void Portal::update(double elapsed) {
-	// update animation
-	//animation->update(std::fmod(elapsed, animation->getLength())); 
-
-	// set portal inactive for 1 second after teleporting something
-	if (elapsed - lastUse >= inactiveTime) {
-		// check if there is object in portal (same position, layer up)
-		if (getObjectAt(position) != nullptr) onInteract(elapsed);
-	}
-	
 }
 
 void Portal::setUpAnimation() {

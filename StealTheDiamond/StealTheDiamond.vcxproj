@@ -152,6 +152,7 @@
     <ClCompile Include="Door.cpp" />
     <ClCompile Include="Exit.cpp" />
     <ClCompile Include="Key.cpp" />
+    <ClCompile Include="Laser.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="Door.h" />
     <ClInclude Include="Exit.h" />
     <ClInclude Include="Key.h" />
+    <ClInclude Include="Laser.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Player.h" />

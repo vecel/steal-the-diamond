@@ -28,6 +28,14 @@ Bomb::~Bomb() {
 
 }
 
+void Bomb::update(double elapsed) {
+	if (active) {
+		animation->update(elapsed - plantTime);
+		// std::cout << "Bomb: \nelapsed time: " << elapsed << "\nplant time: " << plantTime << "\nanimation update(" << elapsed - plantTime << ")\n";
+		if (elapsed - plantTime >= explosionTime) onExplode(); // explode after 3 sec
+	}
+}
+
 void Bomb::onCollect() {
 	level->activePlayer->bombs++;
 	removeObject();
@@ -53,10 +61,3 @@ void Bomb::onExplode() {
 	printf("Bomb exploded\n");
 }
 
-void Bomb::update(double elapsed) {
-	if (active) {
-		animation->update(elapsed - plantTime);
-		// std::cout << "Bomb: \nelapsed time: " << elapsed << "\nplant time: " << plantTime << "\nanimation update(" << elapsed - plantTime << ")\n";
-		if (elapsed - plantTime >= explosionTime) onExplode(); // explode after 3 sec
-	}
-}

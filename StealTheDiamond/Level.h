@@ -15,6 +15,10 @@ public:
 	void loadFromFile(std::string path);
 	void draw();
 
+	/*
+		onRender function called after level is created, set objects animations here
+	*/
+	void onRender();
 	void updateLevel();
 
 	void addObjectToRemove(Object* obj);

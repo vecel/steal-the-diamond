@@ -1,2 +1,93 @@
-﻿  Portal.cpp
+﻿  Level.cpp
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Laser.h(12): warning C4091: "static ": zignorowano na lewo od "Laser::Facing" podczas gdy brak deklaracji zmiennej
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(98,35): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(99,37): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(100,37): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(101,38): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(102,50): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(102,38): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(103,50): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(103,38): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(104,41): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(105,52): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(105,38): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(106,41): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(107,41): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(109,41): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(111,46): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(111,36): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(114,39): warning C4244: "argument": konwersja z "float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
+C:\Users\Mati\source\repos\StealTheDiamond\StealTheDiamond\Level.cpp(115,40): warning C4244: "argument": konwersja z "const float" do "T", możliwa utrata danych
+          with
+          [
+              T=int
+          ]
   StealTheDiamond.vcxproj -> C:\Users\Mati\source\repos\StealTheDiamond\Debug\StealTheDiamond.exe

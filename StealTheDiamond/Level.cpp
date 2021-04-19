@@ -9,6 +9,7 @@
 #include "Door.h"
 #include "Bomb.h"
 #include "Portal.h"
+#include "Laser.h"
 
 const float Level::tileSize = 32.0f;
 
@@ -50,6 +51,10 @@ void Level::loadFromFile(std::string path) {
 }
 
 void Level::draw() { tileMap->draw(); }
+
+void Level::onRender() {
+	for(Object* obj : objects) obj->
+}
 
 void Level::updateLevel() {
 	double elapsed = clock.getElapsedTime().asMilliseconds();
@@ -104,7 +109,8 @@ void Level::setUpObjectTextures() {
 	objectTextures[21] = sf::Vector2i(4 * tileSize, 2 * tileSize);
 	objectTextures[33] = sf::Vector2i(0, 4 * tileSize);
 	objectTextures[41] = sf::Vector2i(0, 5 * tileSize); // bomb
-	objectTextures[42] = sf::Vector2i(tileSize, 5 * tileSize); // active bomb
+	//objectTextures[42] = sf::Vector2i(tileSize, 5 * tileSize); // active bomb
+	objectTextures[43] = sf::Vector2i(0, 6 * tileSize);
 
 	objectTextures[99] = sf::Vector2i(tileSize, tileSize); // temporary blank tile - diamond load texture itself
 
@@ -163,6 +169,10 @@ void Level::loadObjects(std::fstream& levelData) {
 			}
 			else if (objId == 41) {
 				Object* obj = new Bomb(this, position, objId);
+				objects.push_back(obj);
+			}
+			else if (objId == 43) {
+				Object* obj = new Laser(this, position, objId);
 				objects.push_back(obj);
 			}
 			else if (objId == 99) {

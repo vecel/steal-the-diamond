@@ -22,8 +22,9 @@ public:
 	Object(Level* l, sf::Vector2i pos, int objId, int layer);
 	virtual ~Object() = 0;
 
-	//void setTextureRect(const sf::IntRect& rectangle);
+	virtual void onRender();
 	
+	virtual void update(double elapsed);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual bool move(sf::Vector2i dir);
 	virtual bool onSink();
@@ -31,7 +32,6 @@ public:
 	virtual void onCollect();
 	virtual void onInteract();
 	virtual void onExplode();
-	virtual void update(double elapsed);
 
 	Level* level;
 	sf::Vector2i position;
