@@ -183,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="levels\level-3.txt" />
+    <Text Include="levels\level-4.txt" />
     <Text Include="levels\test-level-2.txt" />
     <Text Include="levels\test-level.txt" />
   </ItemGroup>

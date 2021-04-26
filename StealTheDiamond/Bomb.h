@@ -13,6 +13,8 @@ public:
 	void onCollect();
 	void onExplode();
 
+	void setUpAnimation();
+
 	double explosionTime = 2000.0;
 	bool active;
 	float plantTime;

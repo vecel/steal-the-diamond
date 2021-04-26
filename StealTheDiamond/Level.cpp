@@ -20,6 +20,7 @@ Level::Level(sf::RenderWindow* window, std::string filePath) {
 	setUpObjectTextures();
 	loadFromFile(filePath);
 
+	playerIndex = 0;
 	diamonds = 0;
 }
 
@@ -53,7 +54,8 @@ void Level::loadFromFile(std::string path) {
 void Level::draw() { tileMap->draw(); }
 
 void Level::onRender() {
-	for(Object* obj : objects) obj->
+	for (Object* obj : objects) obj->onRender();
+	activePlayer = players.front();
 }
 
 void Level::updateLevel() {
@@ -79,6 +81,23 @@ void Level::removeOldObj() {
 		}
 
 	}
+}
+
+bool Level::switchActivePlayer() {
+	if (players.size() <= 1) return false;
+	
+	do {
+		playerIndex++;
+		if (playerIndex >= players.size()) playerIndex = 0;
+	} while (players.at(playerIndex) == nullptr);
+	
+	activePlayer = players.at(playerIndex);
+
+	return true;
+}
+
+void Level::onPlayerDeath() {
+	players.at(playerIndex) = nullptr;
 }
 
 sf::Vector2i Level::getTextureStartingPoint(int id) {
@@ -107,6 +126,7 @@ void Level::setUpObjectTextures() {
 	objectTextures[16] = sf::Vector2i(7 * tileSize, tileSize); // broken snowy wall
 	objectTextures[17] = sf::Vector2i(0, 2 * tileSize); // box
 	objectTextures[21] = sf::Vector2i(4 * tileSize, 2 * tileSize);
+	objectTextures[22] = sf::Vector2i(5 * tileSize, 2 * tileSize);
 	objectTextures[33] = sf::Vector2i(0, 4 * tileSize);
 	objectTextures[41] = sf::Vector2i(0, 5 * tileSize); // bomb
 	//objectTextures[42] = sf::Vector2i(tileSize, 5 * tileSize); // active bomb
@@ -156,7 +176,7 @@ void Level::loadObjects(std::fstream& levelData) {
 			}
 			else if (objId > 20 && objId <= 24) {
 				Object* obj = new Player(this, position, objId);
-				activePlayer = dynamic_cast<Player*>(obj);
+				players.push_back(dynamic_cast<Player*>(obj));
 				objects.push_back(obj);
 			}
 			else if (objId > 24 && objId <= 32) {
@@ -171,7 +191,7 @@ void Level::loadObjects(std::fstream& levelData) {
 				Object* obj = new Bomb(this, position, objId);
 				objects.push_back(obj);
 			}
-			else if (objId == 43) {
+			else if (objId > 42 && objId <= 46) {
 				Object* obj = new Laser(this, position, objId);
 				objects.push_back(obj);
 			}

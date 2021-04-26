@@ -123,6 +123,9 @@
     <Text Include="levels\level-3.txt">
       <Filter>Pliki zasobów</Filter>
     </Text>
+    <Text Include="levels\level-4.txt">
+      <Filter>Pliki zasobów</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <Image Include="textures\stone-wall.png">

@@ -24,12 +24,17 @@ public:
 	void addObjectToRemove(Object* obj);
 	void removeOldObj();
 
+	bool switchActivePlayer();
+	void onPlayerDeath();
+
 	sf::Vector2i getTextureStartingPoint(int id);
 
 	sf::Clock clock;
 	TileMap* tileMap;
 	std::vector<Object*> objects;
 	std::vector<Object*> objToRemove;
+	std::vector<Player*> players;
+	int playerIndex;
 	Player* activePlayer;
 	int diamonds;
 	int diamondsToCollect;

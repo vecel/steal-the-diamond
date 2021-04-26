@@ -14,6 +14,8 @@ public:
 	Portal(Level* level, sf::Vector2i pos, int id, sf::Vector2i destination, int layer = 0);
 	~Portal();
 
+	void onRender();
+
 	void update(double elapsed);
 	void onInteract(double elapsed); // not inherited from Object
 

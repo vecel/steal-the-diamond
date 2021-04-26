@@ -4,7 +4,7 @@
 
 class Level;
 
-class Object: public sf::Drawable
+class Object: public sf::Drawable, public sf::Transformable
 {
 public:
 	enum Flags : unsigned int {
@@ -17,6 +17,7 @@ public:
 	};
 
 	static int size;
+	static float offset;
 	static sf::Vector2f transform; 
 
 	Object(Level* l, sf::Vector2i pos, int objId, int layer);

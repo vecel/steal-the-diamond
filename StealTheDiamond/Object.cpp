@@ -7,6 +7,7 @@
 class TileMap;
 
 int Object::size = 32;
+float Object::offset = 10.0;
 sf::Vector2f Object::transform(10.0f, 10.0f);
 
 Object::Object(Level* l, sf::Vector2i pos, int objId, int layer) {

@@ -2,14 +2,30 @@
 
 int Laser::defaultId = 43;
 
-Laser::Laser(Level* level, sf::Vector2i pos, int id, int layer) : Object(level, pos, id, layer) {
+Laser::Laser(Level* level, sf::Vector2i pos, int id, int layer) : Object(level, pos, defaultId, layer) {
 
 	flags = DESTROYABLE;
 	setFacing(id); // rotate laser only after setting its texture (in object constructor)
-
+	
 }
 
 Laser::~Laser(){}
+
+void Laser::onRender() {
+	// change origin and set rotation
+	float o_x = sprite.getTextureRect().width / 2;
+	float o_y = sprite.getTextureRect().height / 2;
+	sprite.setOrigin(o_x, o_y);
+	sprite.move(o_x, o_y);
+	sprite.setRotation(90 * (int)(facing));
+	
+	// set laser beam texture
+
+}
+
+void Laser::update(double elapsed) {
+
+}
 
 void Laser::renderLaserBeam() {
 

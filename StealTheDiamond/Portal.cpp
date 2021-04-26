@@ -8,13 +8,14 @@ Portal::Portal(Level* level, sf::Vector2i pos, int id, sf::Vector2i destination,
 	type = static_cast<PortalType>(id - 100);
 	printf("Portal type %d\n", type);
 
-	
-	setUpAnimation(); // nie dziala dodawanie klatek, bo grafika jest ustawiana po wykonaniu polecen z konstruktora
-
 }
 
 Portal::~Portal() {
 
+}
+
+void Portal::onRender() {
+	//setUpAnimation();
 }
 
 void Portal::update(double elapsed) {
@@ -66,9 +67,6 @@ void Portal::setUpAnimation() {
 	printf("InitialTxtPix %d %d\n", initialTxtPix.x, initialTxtPix.y);
 
 	sf::IntRect txtRect(initialTxtPix, sf::Vector2i(32, 32));
-	if (!texture.loadFromFile("textures\\object-0-assets.png", txtRect)) printf("Cannot load portal textures\n");
-	//sprite.setTextureRect(txtRect); // lub setTexture(texture);
-	sprite.setTexture(texture);
 	
 	animation = new Animation(this);
 	animation->addFrame({ sf::IntRect(initialTxtPix.x, initialTxtPix.y, 32, 32), 250.0 });

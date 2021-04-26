@@ -14,7 +14,6 @@ Player::~Player() {
 }
 
 void Player::update(double elapsed) {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) showProperties();
 
 	// planting active bombs
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) {
@@ -35,10 +34,10 @@ void Player::update(double elapsed) {
 	}
 
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(sf::Vector2i(-1, 0));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) move(sf::Vector2i(1, 0));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(sf::Vector2i(0, -1));
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(sf::Vector2i(0, 1));
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) move(sf::Vector2i(-1, 0));
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) move(sf::Vector2i(1, 0));
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) move(sf::Vector2i(0, -1));
+	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) move(sf::Vector2i(0, 1));
 
 	if (getGroundTypeAt(position) == TileMap::WATER) onSink();
 	if (getGroundTypeAt(position) == TileMap::VOID) onFallIntoVoid();
@@ -76,7 +75,7 @@ bool Player::move(sf::Vector2i dir) {
 
 bool Player::onSink() {
 	printf("player drowned\n");
-
+	level->onPlayerDeath();
 	level->activePlayer = nullptr;
 
 	Object::onSink();
@@ -86,6 +85,7 @@ bool Player::onSink() {
 
 void Player::onFallIntoVoid() {
 	printf("player fell into void... sad :(\n");
+	level->onPlayerDeath();
 	level->activePlayer = nullptr;
 	Object::onFallIntoVoid();
 }
@@ -107,15 +107,4 @@ void Player::plantBomb(sf::Vector2i dir, bool active) {
 	}
 }
 
-
-
-
-void Player::showProperties() {
-	std::cout << "\nObjects: " << level->objects.size() << '\n';
-	std::cout << "Keys: " << keys.size() << "\nKey ids : ";
-	for (int i : keys) std::cout << i << " ";
-	std::cout << '\n';
-	std::cout << "Bombs: " << bombs << '\n';
-	std::cout << "Elapsed time: " << getElapsedTime() << '\n';
-}
 

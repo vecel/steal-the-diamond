@@ -11,16 +11,8 @@ Bomb::Bomb(Level* level, sf::Vector2i pos, int id, int layer, bool active) : Obj
 	}
 	else {
 		plantTime = getElapsedTime();
-
-		if (!texture.loadFromFile("textures\\bomb-anim.png")) printf("Cannot load bomb animation texture\n");
-		sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
-
-		animation = new Animation(this);
-
-		animation->addFrame({ sf::IntRect(0, 0, 32, 32), 500.0 });
-		animation->addFrame({ sf::IntRect(32, 0, 32, 32), 500.0 });
-		animation->addFrame({ sf::IntRect(64, 0, 32, 32), 500.0 });
-		animation->addFrame({ sf::IntRect(96, 0, 32, 32), 500.0 });
+		setUpAnimation(); // pokombinowac cos zeby przeniesc to do onrender()
+		
 	}
 }
 
@@ -59,5 +51,17 @@ void Bomb::onExplode() {
 	if (isObjectAt(position + sf::Vector2i( 1,  1), 1)) getObjectAt(position + sf::Vector2i( 1,  1), 1)->onExplode();
 
 	printf("Bomb exploded\n");
+}
+
+void Bomb::setUpAnimation() {
+	if (!texture.loadFromFile("textures\\bomb-anim.png")) printf("Cannot load bomb animation texture\n");
+	sprite.setTextureRect(sf::IntRect(0, 0, 32, 32));
+
+	animation = new Animation(this);
+
+	animation->addFrame({ sf::IntRect(0, 0, 32, 32), 500.0 });
+	animation->addFrame({ sf::IntRect(32, 0, 32, 32), 500.0 });
+	animation->addFrame({ sf::IntRect(64, 0, 32, 32), 500.0 });
+	animation->addFrame({ sf::IntRect(96, 0, 32, 32), 500.0 });
 }
 

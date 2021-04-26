@@ -21,8 +21,5 @@ public:
 	sf::Vector2i velocity;
 	std::vector<int> keys;
 	int bombs;
-
-private:
-	void showProperties(); // for debug
 };
 
